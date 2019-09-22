@@ -14,9 +14,8 @@ urlpatterns = [
     path('one/',searchlistview,name='ci'),
     path('one-cbv/',search_listview.as_view(),name='cl'),
 
-
-
 ]
+
 
 if settings.DEBUG:
     urlpatterns = urlpatterns+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

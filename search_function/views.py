@@ -21,6 +21,7 @@ class search_listview(ListView):
 def searchlistview(request,*args,**kwargs):
     temp = get_temp()
     y1 = json.loads(temp)
+    one = 0
     df1 = get_dataframe(y1)
     if request.method == 'GET' and 'viewbutton1' in request.GET:
         plate = request.GET['viewbutton1']
