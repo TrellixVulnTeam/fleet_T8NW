@@ -204,6 +204,71 @@ input:checked + .slider:before {
 
     }
     </style>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+ $( document ).ready(function() {
+
+
+am4core.useTheme(am4themes_animated);
+
+var chart = am4core.create("chartdiv", am4charts.PieChart);
+chart.hiddenState.properties.opacity = 0;
+
+chart.data = [
+  {
+    country: "No Data",
+    value: 260
+  },
+
+  {
+    country: "Stop",
+    value: 200
+  },
+  {
+    country: "Idle",
+    value: 165
+  },
+  {
+    country: "Running",
+    value: 139
+  },
+
+];
+
+var series = chart.series.push(new am4charts.PieSeries());
+series.dataFields.value = "value";
+series.cursorTooltipEnabled = "false";
+series.dataFields.category = "country";
+series.slices.template.cornerRadius = 6;
+series.colors.step = 4;
+
+series.hiddenState.properties.endAngle = -60;
+
+chart.legend = new am4charts.Legend();
+
+var label = chart.createChild(am4core.Label);
+
+label.fontSize = 10;
+label.align = "right";
+label.isMeasured = false;
+label.x = 70;
+label.y = 20;
+
+    });
+
+</script>
+<style>#chartdiv {
+  width: 60%;
+  height: 150px;
+}
+
+
+</style>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<div id="chartdiv"></div>
     <div class="container-fluid a" style="position:relative;">
 <br>
 <div class="row">
@@ -228,12 +293,10 @@ input:checked + .slider:before {
 </button></form></div>
 <div class="col-lg-2 card "><button class="p" style="background-color: transparent">
 <div class="card-body"><img class="card-img-left" src="{% static 'images/miniblue.png'%}" height="40px" width="100px" style="padding-right:10px; ">
-  &nbsp; <span style="font-size: 20px">0</span><b style="padding-left:30px;margin-bottom: 30px;"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Data</b></div></button></div>
-    <div class="col-lg-2 card"><button class="p"><div class="card-body"><img class="card-img-left" src="{% static 'images/ico.png'%}" width="45px" height="44px" style="padding-bottom:10px;"></a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">11 </span><b style="padding-left:30px;margin-bottom: 30px;"><br>Alerts</b></div></button></div>
-</div></div><hr>
+  &nbsp; &nbsp;&nbsp; <span style="font-size: 20px">0</span><b style="padding-left:30px;margin-bottom: 30px;"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Data</b></div></button></div>
+ <div class="col-lg-2">  </div>
 
-<div  class="scrollit">
+<div  class="container-fluid scrollit ">
     <table  cellspacing="0" cellpadding="2"><tr>
        <th>S.no</th>
         <th>Status</th>
@@ -241,8 +304,8 @@ input:checked + .slider:before {
         <th>Branch</th>
         <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br>Vehicle</a></th>
         <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br>Distance</a></th>
-        <th>Running<a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br>Driver</a></th>
-        <th>Idle<a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br>Driver</a></th>
+        <th>Running<a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br></a></th>
+        <th>Idle<a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br></a></th>
         <th>Stop<a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br>Driver</a></th>
         <th>Duration<a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br>Driver</a></th>
         <th>Speed<a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br>Driver</a></th>
@@ -282,13 +345,14 @@ input:checked + .slider:before {
               <td>--</td>
               <td>--</td>
               <td>--</td>
+            <td>--</td>
         </tr>
          {% endfor %}
 
     </table>
 </div>
 
-
+</div></div>
         <!-- Modal footer -->
 
 
