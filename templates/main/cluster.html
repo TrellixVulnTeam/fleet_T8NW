@@ -8,14 +8,14 @@
 
 .map{
 width:635px;
-height:400px;
+height:450px;
 position:relative;
 margin:0px;
 padding:0px;
 }
 .d{
 width:1400px;
-height:400px;
+height:450px;
 
 
 }
@@ -186,7 +186,7 @@ input:checked + .slider:before {
 .sample{
 width:635px;
 overflow:auto;
-height:400px;
+height:450px;
 position:relative;
 float:left;
 padding-right:2px;
@@ -317,8 +317,8 @@ map.setCenter(chicago);
 }
 function initMap() {
 var map = new google.maps.Map(document.getElementById('map'), {
-zoom: 3.5,
-center: {lat: 28.667957, lng: 77.166449},
+zoom: 4,
+center: {lat: 22.9734, lng: 78.6569},
 disableDefaultUI: true,
 
 fullscreenControl: true,
@@ -858,9 +858,9 @@ $('#map').show();
 &nbsp;
 <div class="col-lg-2 card "><form><button class="p">
 <div class="card-body"><img class="card-img-left" src="{% static 'images/miniblue.png'%}" height="40px" width="100px" style="padding-right:10px; ">
-    <span style="font-size: 20px"></span><b style="padding-left:30px;margin-bottom: 30px;"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Data</b></div></button></form></div>
-    <div class="col-lg-2 card"><button class="p"><div class="card-body"><a href="{% url 'alerts' %}" data-toggle="tooltip" data-placement="bottom" title="Alerts"><img class="card-img-left" src="https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/notification-circle-red-512.png" width="65px" height="70px" style="padding:10px;"></a>
-    </div></button></div>
+  &nbsp;&nbsp;&nbsp;  <span style="font-size: 20px">0</span><b style="padding-left:30px;margin-bottom: 30px;"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Data</b></div></button></form></div>
+    <div class="col-lg-2 card"><button class="p"><div class="card-body"><img class="card-img-left" src="{% static 'images/ico.png'%}" width="45px" height="44px" style="padding-bottom:10px;"></a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">11 </span><b style="padding-left:30px;margin-bottom: 30px;"><br>Alerts</b></div></button></div>
 </div></div><hr>
  <div  class="container-fluid" style="font-size:24px; margin-top: -30px;">
 <div class="row"><div class="col-md-6"></div>
@@ -875,16 +875,16 @@ $('#map').show();
 <a href="#"><i class="fa fa-power-off" style="font-size:15px" data-placement="bottom" title="Logout"></i></a>&nbsp;&nbsp;&nbsp;
 </div>
 </div></div>
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
 {#    -------------------------------------------------------------------pdf---------------------------------------------------------------------------------#}
    <script>
 
-function createPDF() {alert('123');
+function createPDF() {
 var sTable = document.getElementById('tab').innerHTML;
 
 var style = "<style>";
 style = style + "table {width: 100%;font: 17px Calibri;}";
-style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+style = style + "table, th, td {border: solid 2px #000; border-collapse: collapse;";
 style = style + "padding: 2px 3px;text-align: center;}";
 style = style + "</style>";
 
