@@ -514,6 +514,6 @@ class track(APIView):
 
 def table_map(request):
     print("one")
-    print("parimala")
+    print("reymond")
     return render("main/table_map.html")
 
