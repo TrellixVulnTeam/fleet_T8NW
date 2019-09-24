@@ -2,9 +2,18 @@
 {% load static %}
 {% block content1 %}
     <link rel="stylesheet" href="{% static 'css/style4.css' %}">
-<body>
-<div class="container-fluid" style="margin-top:10px">
-<div class="col-lg-11"></div><div class="col-lg-1">
+<style>
+  .scrollit {
+height:550px;
+width: auto;
+overflow:auto;
+margin:1px;
+text-align:center;
+
+}
+</style>
+<div class="container-fluid">
+<div class="col-lg-11"> <h1>Device Log</h1></div><div class="col-lg-1" style="padding-top:20px">
     <button type="button" class="btn btn-default btn-medium" data-toggle="modal" data-target="#myModal">
       <span class="glyphicon glyphicon-search"></span>
     </button>
@@ -534,7 +543,6 @@ function sortListDir(z) {
 </script>
 
 <div class="container">
-  <h2>Device Log Summary</h2>
   <form action="/action_page.php">
     <div class="form-group">
       <label for="imei">IMEI Number:</label>
@@ -608,6 +616,4 @@ function sortListDir(z) {
   </form>
 </div>
 
-</body>
-</html>
 {% endblock %}

@@ -3,6 +3,14 @@
 {% block content1 %}
   <link rel="stylesheet" href="{% static 'css/style4.css' %}">
 <style>
+.scrollit {
+height:550px;
+width: auto;
+overflow:auto;
+margin:1px;
+text-align:center;
+
+}
 .color{
 background-color:rgb(204, 204, 204);
 }
@@ -11,8 +19,8 @@ font-family: "Times New Roman", Times, serif;
 }
 
 </style>
-<div class="container-fluid" style="margin-top:10px">
-<div class="col-lg-11"></div><div class="col-lg-1">
+<div class="container-fluid">
+<div class="col-lg-11"> <h1>Stoppage Summary</h1></div><div class="col-lg-1" style="padding-top:20px">
     <button type="button" class="btn btn-default btn-medium" data-toggle="modal" data-target="#myModal">
       <span class="glyphicon glyphicon-search"></span>
     </button>
@@ -541,8 +549,9 @@ function sortListDir(z) {
 }
 </script>
 
-<div class="container">
-<p>Stoppage  Summary</p> 
+<div class="container-fluid">
+
+  <div  class="container-fluid scrollit">
 <table class="table table-bordered" style="font-size:13px;">
 <thead class="color" id="text">
 <tr>
@@ -603,10 +612,13 @@ function sortListDir(z) {
 		<td>98</td>
 		<td>0</td>
 		<td>21</td>
+          <td>2</td>
 		<td><img src="http://13.127.144.213/images/Play.png"></td>
+
 		</tr>
 {% endfor %}
 </tbody>
 </table>
+</div>
 </div>
 {% endblock %}

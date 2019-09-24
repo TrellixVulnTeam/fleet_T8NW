@@ -2,9 +2,18 @@
 {% load static %}
 {% block content1 %}
   <link rel="stylesheet" href="{% static 'css/style4.css' %}">
-<body>
-<div class="container-fluid" style="margin-top:10px">
-<div class="col-lg-11"></div><div class="col-lg-1">
+<style>
+    .scrollit {
+height:550px;
+width: auto;
+overflow:auto;
+margin:1px;
+text-align:center;
+
+}
+</style>
+<div class="container-fluid">
+<div class="col-lg-11"> <h1>Report Generator</h1></div><div class="col-lg-1" style="padding-top:20px">
     <button type="button" class="btn btn-default btn-medium" data-toggle="modal" data-target="#myModal">
       <span class="glyphicon glyphicon-search"></span>
     </button>
@@ -622,6 +631,5 @@ Branch:
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Form Date&nbsp;:
   <input type="text" name="firstname" value="18-09-2019 00:00"><br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To Date&nbsp;:&nbsp;<input type="text" name="firstname" value="18-09-2019 12:13">
-</body>
-</html>
+
 {% endblock %}
