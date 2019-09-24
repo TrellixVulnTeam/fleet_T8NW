@@ -9,7 +9,7 @@ import names
 from googlegeocoder import GoogleGeocoder
 from django import template
 
-
+print("parimala")
 
 def get_dataframe(y1):
     df1 = json_normalize(y1["assetHistory"])
