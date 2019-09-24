@@ -29,7 +29,7 @@ td {
 
 
       .scrollit {
-    height:465px;
+    height:460px;
     width: auto;
     overflow:auto;
     margin:1px;
@@ -47,7 +47,7 @@ background-color: rgb(218, 218, 218);
 th,table {
 font-family: "Times New Roman", Times, serif;
 text-align:center;
-font-size:13.4px;
+font-size:13.6px;
 border: 2px solid #787878;
 }
 
@@ -243,29 +243,35 @@ chart.data = [
 
 var series = chart.series.push(new am4charts.PieSeries());
 series.dataFields.value = "value";
-series.cursorTooltipEnabled = "false";
 series.dataFields.category = "country";
 series.slices.template.cornerRadius = 6;
 series.colors.step = 4;
-
-series.hiddenState.properties.endAngle = -60;
+series.legendSettings.valueText.disabled=true;
 
 chart.legend = new am4charts.Legend();
+chart.legend.position = "left";
+chart.legend.markers.template.disabled = true;
+chart.legend.labels.template.disabled=true;
+chart.legend.itemContainers.template.togglable = false;
+chart.legend.itemContainers.template.events.on("hit", function(ev) {
 
-var label = chart.createChild(am4core.Label);
+    });
 
-label.fontSize = 10;
-label.align = "right";
-label.isMeasured = false;
-label.x = 70;
-label.y = 20;
 
     });
 
 </script>
-<style>#chartdiv {
-  width: 60%;
-  height: 150px;
+<style>#chartwrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+#chartdiv {
+  position: absolute;
+  top: 0px;
+  right: 120px;
+  width : 130px;
+  height : 130px;
 }
 
 
@@ -273,7 +279,8 @@ label.y = 20;
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
 <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-<div id="chartdiv"></div>
+<script src="https://www.amcharts.com/lib/4/themes/dataviz.js"></script>
+
     <div class="container-fluid a" style="position:relative;">
 <br>
 <div class="row">
@@ -299,7 +306,7 @@ label.y = 20;
 <div class="col-lg-2 card "><button class="p" style="background-color: transparent">
 <div class="card-body"><img class="card-img-left" src="{% static 'images/miniblue.png'%}" height="40px" width="100px" style="padding-right:10px; ">
   &nbsp; &nbsp;&nbsp; <span style="font-size: 20px">0</span><b style="padding-left:30px;margin-bottom: 30px;"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Data</b></div></button></div>
- <div class="col-lg-2">  </div>
+ <div class="col-lg-2" id="chartdiv">  </div>
 
 <div  class="container-fluid scrollit">
     <table   cellpadding="5" cellspacing="5" ><tr>
