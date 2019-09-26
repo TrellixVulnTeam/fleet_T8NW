@@ -7,14 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/style4.css' %}">
 
 <style>
-.scrollit {
-height:550px;
-width: auto;
-overflow:auto;
-margin:1px;
-text-align:center;
 
-}
 .color{
 background-color:rgb(204, 204, 204);
 }
@@ -23,8 +16,9 @@ font-family: "Times New Roman", Times, serif;
 }
 
 </style>
-<div class="container-fluid">
-<div class="col-lg-11"> <h1>AC-Misused Summary</h1></div><div class="col-lg-1" style="padding-top:20px">
+<body>
+<div class="container-fluid" style="margin-top:10px">
+<div class="col-lg-11"></div><div class="col-lg-1">
     <button type="button" class="btn btn-default btn-medium" data-toggle="modal" data-target="#myModal">
       <span class="glyphicon glyphicon-search"></span>
     </button>
@@ -552,8 +546,9 @@ function sortListDir(z) {
   }
 }
 </script>
-<div class="container-fluid">
-<div  class="container-fluid scrollit">
+<div class="container">
+<p>AC Misused Summary</p> 
+
 <table class="table table-bordered" style="font-size:13px;">
 <thead class="color" id="text">
 <tr>
@@ -620,7 +615,6 @@ function sortListDir(z) {
 </tbody>
 </table>
 </div>
-</div>
-
-
+</body>
+</html>
 {% endblock %}
