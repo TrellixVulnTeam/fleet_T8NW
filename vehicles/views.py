@@ -9,7 +9,7 @@ import names
 from googlegeocoder import GoogleGeocoder
 from django import template
 
-print("parimala")
+
 
 def get_dataframe(y1):
     df1 = json_normalize(y1["assetHistory"])
@@ -40,7 +40,7 @@ def auto(request):
     geocoder = GoogleGeocoder("AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU")
     y1 = df1
 
-    for i in range(0,256):
+    for i in range(0,30):
         v1 = vehicle()
         print(i)
         name = names.get_first_name()
@@ -69,6 +69,9 @@ def auto(request):
         compid = str(y1[i]["companyId"])
         v1.companyId = compid
         v1.odometer = odometer
+        date = str(y1[i]["eventTimeStamp"])
+        date = date[0:11]
+        v1.date = date
         assetcode = str(y1[i]["AssetCode"])
         v1.assetId = assetcode
         direction = str(y1[i]["direction"])

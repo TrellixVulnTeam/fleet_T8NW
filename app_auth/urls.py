@@ -6,7 +6,8 @@ from app_auth.views import device_listview,devicelistview
 from .views import travel_summary,detail_travel_summary,trip_summary,\
     stoppage_summary,idle_summary,idle_detail_summary,inactive_summary,\
     ignition_summary,ac_summary,ac_misused_summary,speed_vs_distance,\
-    vehicle_location,sms_email,vehicle_status,system_log,report_generator,device_log,\
+    vehicle_location,sms_email,vehicle_status,\
+    system_log,report_generator,device_log,\
     analog_data,personal_report,rfid_data,actual_trip_summary
 
 urlpatterns = [

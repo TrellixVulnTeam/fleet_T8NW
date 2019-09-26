@@ -20,7 +20,7 @@ class vehicle(models.Model):
     deviceImeiNo = models.CharField(max_length=15, null=True)
     plateNumber = models.CharField(max_length=10, null=True)
     AssetCode = models.CharField(max_length=10, null=True)
-    speed = models.CharField(max_length=5, null=True)
+    speed = models.IntegerField(max_length=5, null=True)
     companyId = models.CharField(max_length=10, null=True)
     engine = models.CharField(max_length=50, null=True)
     assetId = models.CharField(max_length=10, null=True)
