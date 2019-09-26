@@ -4,10 +4,6 @@
 {% load static %}
 
 <style>
-.file{
-
-padding-top:50px;
-}
 .d{
 background-color:#ff4d4d;
 }
@@ -42,11 +38,12 @@ background-color:#cc3300;
 background-color:#B5B201;
 }
 .g{
-border-bottom-style: solid;
-border-bottom-color: hsl(89, 43%, 51%);
+height:5px;
+width:auto;
 padding-bottom:0px;
 display: block;
 }
+.g .row{padding:0px;margin:0px;}
 h1,
 p {
 text-align: center;
@@ -212,7 +209,7 @@ right: 0px;
 bottom: 0px;
 
 }
-
+body{background-color:grey;}
 
 </style>
 <script>
@@ -264,14 +261,14 @@ $('#slideshow3 > div:first')
 
 
 <div class="file">
-<h4 class="display-4" style="text-align:center;color:white">Welcome To Fleet Management</h4>
+<h2 style="text-align:center;color:white">Welcome </h2>
 
 
-<div class="container">
+<div class="container-fluid">
 <div class="row">
 
 <div class="col-md-4  d " style="padding:0px;">
-<a href="{%url 'map'%}"><img src="{% static 'images/li1.jpg'%}" width="380px" height="120px" ><p>Live Location</p></a>
+<a href="{%url 'map'%}"><img src="{% static 'images/li1.jpg'%}" width="430px" height="120px" ><p>Live Location</p></a>
 
 </div>&nbsp;
 <div class="col-md-2 d2">
@@ -307,32 +304,32 @@ $('#slideshow3 > div:first')
     <img src="{% static 'images/re1.png'%}"  height="120px" width="150px" style="padding-left:30px;" ><p>Reports</p></a>
  </div> &nbsp;
  <div class="col-md-4 d2 " id="slideshow1"  data-toggle="tooltip" title="Geofence"><div>
-     <a href="{%url 'geofence'%}"><img src="{% static 'images/g.jpg'%}" width="380px" height="150px"></a>
+     <a href="{%url 'geofence'%}"><img src="{% static 'images/g.jpg'%}" width="431px" height="150px"></a>
 </div>
 
 <div>
-    <a href="{%url 'geofence'%}"><img src="{% static 'images/g1.png'%}" width="380px" height="150px"></a>
+    <a href="{%url 'geofence'%}"><img src="{% static 'images/g1.png'%}" width="431px" height="150px"></a>
 </div>
 <div>
-    <a href="{%url 'geofence'%}"><img src="{% static 'images/g2.png'%}" width="380px" height="150px"></a>
+    <a href="{%url 'geofence'%}"><img src="{% static 'images/g2.png'%}" width="431px" height="150px"></a>
 </div>
 <div>
-    <a href="{%url 'geofence'%}"><img src="{% static 'images/g3.gif'%}" width="380px" height="150px"></a>
+    <a href="{%url 'geofence'%}"><img src="{% static 'images/g3.gif'%}" width="431px" height="150px"></a>
 </div>
 </div>
 &nbsp; &nbsp;&nbsp;&nbsp;
 <div class="col-md-5 d7" id="slideshow2"  data-toggle="tooltip" title="Graphs"> <div>
-    <a href="{%url 'chart'%}"><img src="{% static 'images/grap.jpeg'%}"  width="478px" height="150px" ></a>
+    <a href="{%url 'chart'%}"><img src="{% static 'images/grap.jpeg'%}"  width="541px" height="150px" ></a>
 </div>
 
 <div>
-    <a href="{%url 'chart'%}"><img src="{% static 'images/gr1.gif'%}" width="478px" height="150px"></a>
+    <a href="{%url 'chart'%}"><img src="{% static 'images/gr1.gif'%}" width="541px" height="150px"></a>
 </div>
 <div>
-    <a href="{%url 'chart'%}"><img src="{% static 'images/gr2.jpg'%}" width="478px" height="150px"></a>
+    <a href="{%url 'chart'%}"><img src="{% static 'images/gr2.jpg'%}" width="541px" height="150px"></a>
 </div>
 <div>
-    <a href="{%url 'chart'%}"><img src="{% static 'images/gr3.gif'%}" width="478px" height="150px"></a>
+    <a href="{%url 'chart'%}"><img src="{% static 'images/gr3.gif'%}" width="541px" height="150px"></a>
 </div>
 
 </div>
@@ -345,13 +342,13 @@ $('#slideshow3 > div:first')
     <a href="{%url 'map'%}"><img src="{% static 'images/tr.png'%}" style="padding-left:99px;"><p>Track</p></a>
 </div>
 <div>
-    <a href="{%url 'map'%}"><img src="{% static 'images/tr1.png'%}" width="380px" height="150px"></a>
+    <a href="{%url 'map'%}"><img src="{% static 'images/tr1.png'%}" width="430px" height="150px"></a>
 </div>
 <div>
-    <a href="{%url 'map'%}"><img src="{% static 'images/tr2.png'%}" width="380px" height="150px"></a>
+    <a href="{%url 'map'%}"><img src="{% static 'images/tr2.png'%}" width="430px" height="150px"></a>
 </div>
 <div>
-    <a href="{%url 'map'%}"><img src="{% static 'images/tr4.png'%}" width="380px" height="150px"></a>
+    <a href="{%url 'map'%}"><img src="{% static 'images/tr4.png'%}" width="430px" height="150px"></a>
 </div>
 
 

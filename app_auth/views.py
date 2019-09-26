@@ -413,7 +413,7 @@ def cluster(request):
 
 class charts(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'main/in.html')
+        return render(request, 'main/chart.html')
 
 class ChartData(APIView):
     authentication_classes = []
