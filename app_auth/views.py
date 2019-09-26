@@ -203,7 +203,6 @@ def advance(request):
         p1, result = funclu(df3)
     elif request.method == 'GET' and 'stopbutton' in request.GET:
         p1, result = funclu(df4)
-
     else:
         p1, result = funclu(df1)
 
@@ -215,8 +214,6 @@ def advance(request):
 def tickets(request):
     return render(request,'main/tickets.html')
 
-def alerts(request):
-    return render(request,'main/alerts.html')
 
 def setting(request):
     return render(request,'main/settings.html')
@@ -277,6 +274,7 @@ def marker(request):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required
 def reports(request):
+    reload_and_store()
     return render(request, 'main/report.html')
 
 

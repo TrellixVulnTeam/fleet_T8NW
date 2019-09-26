@@ -20,12 +20,7 @@ background-color: transparent;
 <body>
 
  <div style="margin-top: 90px;" class="container">
-        <div class="row">
-            <div class="col-12">
-               Searched for <b>{{ request.GET.q }}</b>
-                <hr/>
-            </div>
-        </div>
+
  {% if object_list is null %}
      <div class="row">
             <div class="col-12">
@@ -33,6 +28,15 @@ background-color: transparent;
                 <hr/>
             </div>
         </div>
+
+     {% else %}
+     <div class="row">
+            <div class="col-12">
+               Searched for <b>{{ request.GET.q }}</b>
+                <hr/>
+            </div>
+        </div>
+
 
  {% endif %}
      {% for i in object_list %}
@@ -74,11 +78,12 @@ background-color: transparent;
 <li class="nav-item">
 <a class="nav-link active" href="#" style="background-color:gray;height:50px;font-size:10px;width:90px;">Status<br><b>{{ i.status }}</b></a>
 </li>&nbsp;&nbsp;
-    <li class="nav-item"><form method="post">
+    <li class="nav-item"><form method="get">
         {% csrf_token %}
         <button class="p" style="background-color: transparent" value='{{ i.plateNumber }}' type="submit" name="viewbutton1"><a style="height:auto;width:auto;" data-toggle="modal" data-target="#modalContactForm"><img src="{% static 'images/mapview.png' %}" style="width:45px;height:45px;"></a></button>
     </form>
 </li>&nbsp;&nbsp;&nbsp;&nbsp;
+   
 </ul>
  </div>
 </div>

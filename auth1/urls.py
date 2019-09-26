@@ -24,7 +24,7 @@ from django.contrib.auth import views as auth_views
 from app_auth.views import start, register, profile, \
     ChartData, charts, BarChart, Doughnut, track, map, \
     reports,cluster,geofence,marker,tickets,\
-    alerts,setting,tour,devicelistview\
+    setting,tour,devicelistview\
     ,device_listview,detail,advance
 
 
@@ -51,11 +51,11 @@ urlpatterns = [
     path('marker/',marker,name='marker'),
     path('cluster/', cluster, name='cluster'),
     path('tickets/', tickets, name='tickets'),
-    path('alerts/', alerts, name='alerts'),
     path('settings/', setting, name='settings'),
     path('tour/', tour, name='tour'),
     path('search/',include('search_function.urls')),
     path('',include('vehicles.urls')),
+    path('',include('alerts.urls')),
     path('detail/',detail,name='detail'),
     path('reports/',include('reports.urls')),
     path('advance/',advance,name='advance'),

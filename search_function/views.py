@@ -30,7 +30,6 @@ def searchlistview(request,*args,**kwargs):
     else:
         print('escaped if case on geofence!!!!')
         v1 = "{lat: 28.7041, lng: 77.1025}"
-
     today = date.today()
     q = request.GET.get('q')
     if q == "today" or q =="Today":

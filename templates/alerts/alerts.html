@@ -1,0 +1,229 @@
+{% extends 'main/sidenav.html' %}
+{% load static %}
+{% block content1 %}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+.button1 {
+font-size:2px;
+}
+</style>
+
+
+<div class="container" >
+
+<table class="table table-hover" Style="width:100%;margin-top: 90px;">
+<thead>
+<tr>
+<th>
+Detections
+</th>
+</tr>
+</thead>
+
+<thead style="color:white;background-color:gray">
+<tr>
+<th>S.no</th>
+<th>Vehicle Id</th>
+<th>Driver Name</th>
+<th>Detections Details</th>
+<th>Contact</th>
+<th>Priority</th>
+<th>Action</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>AT345456</td>
+<td>Richard Packard</td>
+<td>Towing Detection</td>
+<td>9677684493</td>
+<td><button type="button" class="btn btn-primary">HIGH</button></td>
+
+<td><select class="browser-default">
+<option value="volvo">Solved</option>
+<option value="saab">None</option>
+</select></td>
+<td><button data-toggle="modal" data-target="#modalContactForm"><img src="https://img.icons8.com/cotton/20/000000/worldwide-location--v2.png">&nbsp;Get Position</button></td>
+
+</tr>
+<tr>
+<td>2</td>
+<td>AT246456</td>
+<td>William Patrik</td>
+<td>Anamoly Detection</td>
+<td>89298339273</td>
+<td><button type="button" class="btn btn-warning">MEDIUM</button></td>
+<td><select>
+<option value="volvo">None</option>
+<option value="saab">Solved</option>
+</select></td>
+<td><button data-toggle="modal" data-target="#modalContactForm"><img src="https://img.icons8.com/cotton/20/000000/worldwide-location--v2.png">&nbsp;Get Position</button></td>
+
+</tr>
+<tr>
+<td>3</td>
+<td>AT345656</td>
+<td>Steve madison</td>
+<td>Feul Wastage Detection</td>
+<td>89338339273</td>
+<td><button type="button" class="btn btn-success">LOW</button></td>
+<td><select>
+<option value="volvo">Solved</option>
+<option value="saab">None</option>
+</select></td>
+<td><button data-toggle="modal" data-target="#modalContactForm"><img src="https://img.icons8.com/cotton/20/000000/worldwide-location--v2.png">&nbsp;Get Position</button></td>
+
+</tr>
+<tr>
+<td>4</td>
+<td>AT345325</td>
+<td>Steve madison</td>
+<td>Accident Detection</td>
+<td>94448339273</td>
+<td><button type="button" class="btn btn-danger">VERY HIGH</button></td>
+<td><select>
+<option value="volvo">None</option>
+<option value="saab">Solved</option>
+</select></td>
+<td><button data-toggle="modal" data-target="#modalContactForm"><img src="https://img.icons8.com/cotton/20/000000/worldwide-location--v2.png">&nbsp;Get Position</button></td>
+
+</tr>
+<tr>
+<td>5</td>
+<td>AT342567</td>
+<td>Vignesh</td>
+<td>Traffic violation</td>
+<td>99338009273</td>
+<td><button type="button" class="btn btn-success">LOW</button></td>
+<td><select>
+<option value="volvo">Solved</option>
+<option value="saab">None</option>
+</select></td>
+<td><button data-toggle="modal" data-target="#modalContactForm"><img src="https://img.icons8.com/cotton/20/000000/worldwide-location--v2.png">&nbsp;Get Position</button></td>
+<td>
+</tr>
+<tr>
+<td>6</td>
+<td>AT341236</td>
+<td>Ramesh</td>
+<td>Wrong Route Detection</td>
+<td>8789339273</td>
+<td><button type="button" class="btn btn-warning">MEDIUM</button></td>
+<td><select>
+<option value="volvo">None</option>
+<option value="saab">Solved</option>
+</select></td>
+<td><button data-toggle="modal" data-target="#modalContactForm"><img src="https://img.icons8.com/cotton/20/000000/worldwide-location--v2.png">&nbsp;Get Position</button></td>
+
+</tr>
+<tr>
+<td>7</td>
+<td>AT324567</td>
+<td>Ragul</td>
+<td>Traffic violation</td>
+<td>89338300073</td>
+<td><button type="button" class="btn btn-success">LOW</button></td>
+<td><select>
+<option value="volvo">None</option>
+<option value="saab">Solved</option>
+</select></td>
+<td><button data-toggle="modal" data-target="#modalContactForm"><img src="https://img.icons8.com/cotton/20/000000/worldwide-location--v2.png">&nbsp;Get Position</button></td>
+
+</tr>
+<tr>
+<td>8</td>
+<td>AT340156</td>
+<td>Hari</td>
+<td>Accident Detection</td>
+<td>7723439273</td>
+<td><button type="button" class="btn btn-danger">VERY HIGH</button></td>
+<td><select>
+<option value="volvo">None</option>
+<option value="saab">Solved</option>
+</select></td>
+<td><button ><img src="https://img.icons8.com/cotton/20/000000/worldwide-location--v2.png">&nbsp;Get Position</button></td>
+
+</tr>
+</tbody>
+</table>
+</div>
+    <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Current Vehicle Location</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <div class="md-form ">
+            <div id="map" style="height: 500px;width: 450px;"></div>
+        </div></div>
+
+
+    </div>
+  </div>
+</div>
+
+<script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 28.7041, lng: 77.1025},
+          zoom: 10
+        });
+
+
+          var myLatlng = new google.maps.LatLng(29.7041,80.1025);
+            var mapOptions = {
+            zoom: 4,
+            center: myLatlng
+            }
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            var p = {lat: 28.7041, lng: 77.1025};
+            var marker = new google.maps.Marker({
+                position: p[0],
+                icon: '{% static 'images/bluecar.png'%}',
+                title:"Hello World!"
+            });
+marker.setMap(map);
+
+
+
+        var drawingManager = new google.maps.drawing.DrawingManager({
+          drawingMode: google.maps.drawing.OverlayType.MARKER,
+          drawingControl: true,
+          drawingControlOptions: {
+            position: google.maps.ControlPosition.TOP_CENTER,
+            drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+          },
+          markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
+          circleOptions: {
+            fillColor: '#ffff00',
+            fillOpacity: 0.2,
+            strokeWeight: 2,
+              strokeColor:'',
+            clickable: false,
+            editable: true,
+            zIndex: 1
+          }
+        });
+        drawingManager.setMap(map);
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&libraries=drawing&callback=initMap"
+         async defer></script>
+{% endblock %}
