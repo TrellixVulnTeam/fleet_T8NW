@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'search_function',
     'vehicles',
     'reports',
+    'trip',
 ]
 
 MIDDLEWARE = [

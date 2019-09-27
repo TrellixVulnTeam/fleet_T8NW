@@ -59,8 +59,7 @@ urlpatterns = [
     path('detail/',detail,name='detail'),
     path('reports/',include('reports.urls')),
     path('advance/',advance,name='advance'),
-
-
+    path('', include('trip.urls')),
 ]
 
 if settings.DEBUG:
