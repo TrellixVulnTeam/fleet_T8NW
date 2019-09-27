@@ -1,11 +1,10 @@
 {% extends 'main/sidenav.html' %}
 {% load static %}
 {% block content1 %}
-
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
+      #map12 {
       width:80%;
         height: 70%;
       }
@@ -40,7 +39,7 @@
 
       #vno {
         color: #000;
-        
+
         margin-left: 12px;
         padding: 5px 11px 0px 11px;
       }
@@ -63,14 +62,13 @@
         if (!x[i].innerHTML.toLowerCase().includes(input)) { 
             x[i].style.display="none"; 
         } 
-        else { 
+        else {x
             x[i].style.display="list-item";                  
         } 
     } 
-} 
+}
 	</script>
-  </head>
-  <body>
+ <p>hello</p>
     <div style="display: none">
         <input id="origin-input" class="controls" type="text"
             placeholder="Enter an origin location">
@@ -83,14 +81,13 @@
         <li class="vehno">TNH1200</li> </ol>
     </div>
 
-    <div id="map" >
-</div>
+    <div id="map12"></div>
     <script>
 
 
 function initMap() {
 
-  var map = new google.maps.Map(document.getElementById('map'), {
+  var map = new google.maps.Map(document.getElementById('map12'), {
     mapTypeControl: false,
     center: {lat: -33.8688, lng: 151.2195},
     zoom: 13
@@ -116,6 +113,7 @@ function AutocompleteDirectionsHandler(map) {
   // Specify just the place data fields that you need.
   originAutocomplete.setFields(['place_id']);
 
+
   var destinationAutocomplete =
       new google.maps.places.Autocomplete(destinationInput);
   // Specify just the place data fields that you need.
@@ -137,6 +135,7 @@ function AutocompleteDirectionsHandler(map) {
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
     autocomplete, mode) {
   var me = this;
+  alert('whatup');
  
   autocomplete.bindTo('bounds', this.map);
 
