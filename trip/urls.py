@@ -6,7 +6,7 @@ from django.contrib.auth import views as auth_views
 from .views import add_trip
 
 urlpatterns = [
-    path('add_trip/', add_trip, name='addtrip'),
+    path('addtrip/', add_trip, name='addtrip'),
 ]
 if settings.DEBUG:
     urlpatterns = urlpatterns+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
