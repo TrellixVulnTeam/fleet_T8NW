@@ -89,6 +89,7 @@ function toolTipContent(e) {
 	str3 = "<span style = \"color:Tomato\">Total:</span><strong> "+total+"</strong><br/>";
 	return (str2.concat(str)).concat(str3);
 }
+//Line Chart
 var dps = []; // dataPoints
 var chart = new CanvasJS.Chart("chartCon", {
 	title :{
@@ -131,7 +132,7 @@ var updateChart = function (count) {
 
 updateChart(dataLength);
 setInterval(function(){updateChart()}, updateInterval);
-
+//piechart
 var chart = new CanvasJS.Chart("chartC", {
 	exportEnabled: true,
 	animationEnabled: true,

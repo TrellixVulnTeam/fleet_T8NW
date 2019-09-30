@@ -5,8 +5,8 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map12 {
-      width:80%;
-        height: 70%;
+      width:100%;
+        height: 80%;
       }
 
       .controls {
@@ -68,17 +68,20 @@
     } 
 }
 	</script>
- <p>hello</p>
+
     <div style="display: none">
+        <form  method="post" >
         <input id="origin-input" class="controls" type="text"
             placeholder="Enter an origin location">
 
         <input id="destination-input" class="controls" type="text"
             placeholder="Enter a destination location">
 <input id="vno" onkeyup="search()" type="text" class="controls"
-        name="search" placeholder="Search Vehicle No.."> 
+        name="search" placeholder="Search Vehicle No..">
          <ol id='list'> 
         <li class="vehno">TNH1200</li> </ol>
+            <input type="submit" class="btn btn-primary controls" id="sub" style="margin-left:10px;font-size:16px;">
+            </form>
     </div>
 
     <div id="map12"></div>
@@ -89,8 +92,8 @@ function initMap() {
 
   var map = new google.maps.Map(document.getElementById('map12'), {
     mapTypeControl: false,
-    center: {lat: -33.8688, lng: 151.2195},
-    zoom: 13
+   zoom: 4,
+center: {lat: 22.9734, lng: 78.6569},
   });
 
   new AutocompleteDirectionsHandler(map);
@@ -129,13 +132,14 @@ function AutocompleteDirectionsHandler(map) {
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
       destinationInput);
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(vno);
+    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(sub);
 }
 
 
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
     autocomplete, mode) {
   var me = this;
-  alert('whatup');
+
  
   autocomplete.bindTo('bounds', this.map);
 
@@ -143,7 +147,6 @@ AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
     var place = autocomplete.getPlace();
 
     if (!place.place_id) {
-      window.alert('Please select an option from the dropdown list.');
       return;
     }
     if (mode === 'ORIG') {
@@ -179,4 +182,23 @@ AutocompleteDirectionsHandler.prototype.route = function() {
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&libraries&libraries=places&callback=initMap"
         async defer></script>
+<div class="container-fluid">
+    <div class="row">
+        <table class=" table table-striped table-dark table-bordered">
+            <tr>
+                <th>S.NO</th>
+                <th>Start</th>
+                <th>Stop</th>
+
+                <th>Vehicle No</th>
+                <th>Current Location</th>
+                <th>Distance</th>
+                <th>Duration</th>
+
+                <th>Complete/Incomplete</th>
+            </tr>
+            <tr><td>1</td><td>Chennai</td><td>Mumbai</td><td>TNH1500</td><td>Bangalore</td><td>1,336.8 km</td><td>28/09/2019-24HRS</td><td><input type="checkbox"></td></tr>
+        </table>
+    </div>
+</div>
 {% endblock %}
