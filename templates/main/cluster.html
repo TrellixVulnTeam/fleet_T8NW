@@ -3,197 +3,8 @@
 {% block content1 %}
     <title>Marker Clustering</title>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{%static 'css/style5.css'%}">
 
-    <style>
-
-.map{
-width:635px;
-height:450px;
-position:relative;
-margin:0px;
-padding:0px;
-}
-.d{
-width:1400px;
-height:450px;
-}
-
-.container{
-margin:0px;
-padding:0px;
-}
-
-.row{
-margin:0px;
-padding:0px;
-width:auto;
-}
-    .color{
-background-color: rgb(218, 218, 218);
-}
-th,table {
-font-family: "Times New Roman", Times, serif;
-}
-
-button{
-background-color:transparent;
-text-decoration:none;
-color:black;
-padding:20px;
-border:0;
-border-radius:1px;
-}
-* {
-box-sizing: border-box;
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  float: right;
-}
-.z{
-width: 300px;
-height: 80px;
-padding-right: 20px;
-padding-left: 30px;
-}
-.p {
-
--webkit-appearance: button;
--webkit-writing-mode: horizontal-tb !important;
- display: inline-block;
- width:190px;
- height:78px;
- margin: 0em;
- padding: 0px;
- border: none;
- border-radius: 10px;
-background-color: transparent;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.a .card-body{
-width: 180px;
-height:78px;
-color:black;
-padding:1em;
-}
-.a .card{
-font-size: 12px;
-padding-left: 0px;
-width: 190px;
-height:78px;
-    border-radius: 8px;
-    border-color: transparent;
-
-}
-.a .row{flex-wrap: inherit;}
-
-.a .card:hover{
-
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-  visibility:visible;
-  width: 120px;
-  background-color: black;
-  color: #000;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  top: 100%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
-
-.openbtn:hover {
-  background-color: #444;
-}
-.sample{
-width:635px;
-overflow:auto;
-height:450px;
-position:relative;
-float:left;
-padding-right:2px;
-margin-left:4px;
-}
-.cont{
-margin:0px;
-}
-    </style>
 
 
 
@@ -507,33 +318,31 @@ function myFunction() {
   }
   function myText(){
   $('#sample').removeClass('sample');
+  $('#sample').addClass('e');
 $('#sample').show();
  $('#sample').removeClass('col-md-6');
   $('#map').hide();
 }
  function myText1(){
+
   $('#sample').show();
-  $('#sample').addClass('sample');
   $('#map').show();
-    $('#map').removeClass('d');
+
+$('#sample').addClass('sample');
+  $('#map').addClass('col-md-6');
+    $('#map').addClass('map');
+$('#map').removeClass('d');
 
 }
 function myText2(){
 $('#map').show();
- $('#map').removeClass('col-md-6');
+ $('#map').removeClass('map');
+  $('#map').removeClass('col-md-6');
    $('#map').addClass('d');
   $('#sample').hide();
 }
 
     </script>
-
-
-{#    <div class="container bg-dark" style="font-size:24px;float:right;margin-top:60px;color:white"></div>#}
-{#<a href="#"><span class="glyphicon glyphicon-print"></span>#}
-{#    </a>&nbsp;&nbsp;&nbsp;#}
-{#	<a href="#"><span class="glyphicon glyphicon-fullscreen"></span></a>&nbsp;&nbsp;&nbsp;#}
-{#	<a href="#"><span class="glyphicon glyphicon-refresh"></span></a>#}
-{#</div>#}
 
 
 
@@ -831,76 +640,63 @@ $('#map').show();
       </div>
 
     </div>
-<div class="container-fluid a" style="position:relative;">
+<div class="container-fluid a" style="position:relative;margin-top:10px;">
 <div class="row">
-<div class="col-lg-2 card  "><form class = '' method='GET'><button class = 'p' name="totalbutton"  type='submit'>
-<div class="card-body "><img class="card-img-left" src="{% static 'images/miniwhite.png'%}" height="45px" width="100px" >
- &nbsp; &nbsp;<span style="font-size: 25px">{{ total }} </span><b style="padding-left:50px;">Total</b></div></button>
-</form></div>
+<div class="col-lg-2">
+<img class="" src="{% static 'images/miniwhite.png'%}" height="45px" width="100px" >
+ &nbsp; &nbsp;<span style="font-size: 25px">{{ total }} </span><b style="padding-left:50px;font-size:16px">Total</b></div>
 
-<div class="col-lg-2 card ">
-<form class = '' method='GET'><button class = 'p' name="runningbutton" type='submit'><div class="card-body"><img class="card-img-left" src="{% static 'images/minigreen.png'%}" height="40px" width="90px" >
-   &nbsp;&nbsp; &nbsp;&nbsp;<span style="font-size: 25px">{{ running }} </span><b style="padding-left:50px;">Running</b></div></button>
-</form></div>
+<div class="col-lg-2">
+<img class="" src="{% static 'images/minigreen.png'%}" height="40px" width="90px" >
+   &nbsp;&nbsp; &nbsp;&nbsp;<span style="font-size: 25px">{{ running }} </span><b style="padding-left:50px;font-size: 16px">Running</b></div>
     &nbsp;
 
-<div class="col-lg-2 card " >
-<form method='GET'><button class = 'p' name="idlebutton" type='submit'><div class="card-body " ><img class="card-img-left" src="{% static 'images/miniyellow.png'%}" height="40px" width="100px">
- &nbsp;&nbsp;&nbsp;  <span style="font-size: 25px">{{ idle }} </span><b style="padding-left:50px;">Idle</b></div></button>
-</form></div>
+<div class="col-lg-2" >
+<img class="" src="{% static 'images/miniyellow.png'%}" height="40px" width="100px">
+ &nbsp;&nbsp;&nbsp;  <span style="font-size: 25px">{{ idle }} </span><b style="padding-left:50px;font-size: 16px">Idle</b></div>
 &nbsp;
-<div class="col-lg-2 card"><form class = '' method='GET'><button class="p" name="stopbutton" type='submit'>
-<div class="card-body "><img class="card-img-left" src="{% static 'images/minired.png'%}" height="40px" width="100px" >
-&nbsp;&nbsp;<span style="font-size: 25px">{{ stop }} </span><b style="padding-left:50px;margin-bottom: 30px;">Stop</b></div>
-</button></form></div>
+<div class="col-lg-2">
+<img class="" src="{% static 'images/minired.png'%}" height="40px" width="100px" >
+&nbsp;&nbsp;<span style="font-size: 25px">{{ stop }} </span><b style="padding-left:50px;margin-bottom: 30px;font-size: 16px">Stop</b></div>
 &nbsp;
-<div class="col-lg-2 card "><form><button class="p">
-<div class="card-body"><img class="card-img-left" src="{% static 'images/miniblue.png'%}" height="40px" width="100px" style="padding-right:10px; ">
-  &nbsp;&nbsp;&nbsp;  <span style="font-size: 20px">0</span><b style="padding-left:30px;margin-bottom: 30px;"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Data</b></div></button></form></div>
+<div class="col-lg-2">
+<img class="" src="{% static 'images/miniblue.png'%}" height="40px" width="100px" style="padding-right:10px; ">
+  &nbsp;&nbsp;&nbsp;  <span style="font-size: 20px">0</span><b style="padding-left:30px;margin-bottom: 30px;font-size: 18px">&nbsp;&nbsp;&nbsp;&nbsp;No Data</b></div>
     <div class="col-lg-2 card"><button class="p"><div class="card-body"><img class="card-img-left" src="{% static 'images/ico.png'%}" width="45px" height="44px" style="padding-bottom:10px;"></a>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 20px">11 </span><b style="padding-left:30px;margin-bottom: 30px;"><br>Alerts</b></div></button></div>
-</div></div><hr>
- <div  class="container-fluid" style="font-size:24px; margin-top: -30px;">
+</div></div>
+ <div  class="container-fluid" style="font-size:24px; margin-top: 0px;">
 <div class="row"><div class="col-md-6"></div>
-     <div class="col-md-6" style="float:left;">
+     <div class="col-md-6" style="padding-left:330px;">
 <a href="#"><i class="fa  fa-file-pdf-o"  onclick="createPDF()" id="btnExport" style="font-size:15px;color:red" data-placement="bottom" title="PDF"></i></a>&nbsp;&nbsp;&nbsp;
-     <a href="#" ><i class="fa fa-file-excel-o" onclick="Export1()" style="font-size:15px;color:green" data-placement="bottom" title="XLS"></i></a>&nbsp;&nbsp;&nbsp;
-<a href="#"><span class="glyphicon glyphicon-print" style="font-size:15px" onclick="myFunction()" data-placement="bottom" title="Print"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+     <a href="#" ><i class="fa fa-file-excel-o" onclick="Export1()" style="font-size:15px;color:green" data-placement="bottom" title="XLS"></i></a>&nbsp;&nbsp;
+<a href="#"><span class="glyphicon glyphicon-print" style="font-size:15px" onclick="myFunction()" data-placement="bottom" title="Print"></span></a>&nbsp;&nbsp;
 <a href="#" onclick="myText()"><i class="fa fa-file-text" style="font-size:15px" data-placement="bottom" title="Text"></i></a>&nbsp;&nbsp;&nbsp;
-         <a href="#" onclick="myText2()"><i class="far fa-map" style="font-size:15px;color:green" data-placement="bottom" title="Map"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+         <a href="#" onclick="myText2()"><i class="far fa-map" style="font-size:15px;color:green" data-placement="bottom" title="Map"></i></a>&nbsp;&nbsp;
 <a href="#" onclick="myText1()"><span data-placement="bottom" title="Map+Text"><i class="far fa-map" style="font-size:15px;color:green"></i><i class="fa fa-file-text" style="font-size:15px"></i></span></a>&nbsp;&nbsp;&nbsp;
-<a href="#"><i class="fa fa-gear" style="font-size:15px;color:green" id="setting" data-toggle="modal" data-target="#myModal4" data-toggle="tooltip" data-placement="bottom" title="Settings"></i></a>&nbsp;&nbsp;&nbsp;
-<a href="#"><i class="fa fa-power-off" style="font-size:15px" data-placement="bottom" title="Logout"></i></a>&nbsp;&nbsp;&nbsp;
+
 </div>
 </div></div>
 
 {#    -------------------------------------------------------------------pdf---------------------------------------------------------------------------------#}
    <script>
 
-function createPDF() {
-var sTable = document.getElementById('tab').innerHTML;
 
-var style = "<style>";
-style = style + "table {width: 100%;font: 17px Calibri;}";
-style = style + "table, th, td {border: solid 2px #000; border-collapse: collapse;";
-style = style + "padding: 2px 3px;text-align: center;}";
-style = style + "</style>";
+var doc = new jsPDF();
+var specialElementHandlers = {
+    '#editor': function (element, renderer) {
+        return true;
+    }
+};
 
-// CREATE A WINDOW OBJECT.
-var win = window.open('', '', 'height=700,width=700');
-
-win.document.write('<html><head>');
-win.document.write('<title>Profile</title>'); // <title> FOR PDF HEADER.
-win.document.write(style); // ADD STYLE INSIDE THE HEAD TAG.
-win.document.write('</head>');
-win.document.write('<body>');
-win.document.write(sTable); // THE TABLE CONTENTS INSIDE THE BODY TAG.
-win.document.write('</body></html>');
-
-win.document.close(); // CLOSE THE CURRENT WINDOW.
-
-win.print(); // PRINT THE CONTENTS.
-}
+$('#btnExport').click(function () {
+alert("fdjhjdf");
+    doc.fromHTML($('#sample').html(), 15, 15, {
+        'width': 170,
+            'elementHandlers': specialElementHandlers
+    });
+    doc.save('sample-file.pdf');
+});
 
 
 </script>
@@ -927,44 +723,19 @@ win.print(); // PRINT THE CONTENTS.
 <thead class="color" id="text">
 <tr>
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);">S.no&nbsp;</a><i class="fa fa-fw fa-sort" style="color:rgb(102, 102, 102);float:right;"></i></th>
-<ul class="dropdown-menu">
-<li><a href="#">bn</a></li>
-<li><a href="#">nn</a></li>
-<li><a href="#">nbn</a></li>
-</ul>
+
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);">Status</a><i class="fa fa-fw fa-sort" style="color:rgb(102, 102, 102);float:right;"></i></th>
-<ul class="dropdown-menu">
-<li><a href="#">bn</a></li>
-<li><a href="#">nn</a></li>
-<li><a href="#">nbn</a></li>
-</ul>
+
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);">Vehicle</a><i class="fa fa-fw fa-sort" style="color:rgb(102, 102, 102);float:right;"></i></th>
-<ul class="dropdown-menu">
-<li><a href="#">bn</a></li>
-<li><a href="#">nn</a></li>
-<li><a href="#">nbn</a></li>
-</ul>
+
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);">Driver</a><i class="fa fa-fw fa-sort" style="color:rgb(102, 102, 102);float:right;"></i></th>
-<ul class="dropdown-menu">
-<li><a href="#">bn</a></li>
-<li><a href="#">nn</a></li>
-<li><a href="#">nbn</a></li>
-</ul>
+
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br>AC</a></th>
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/hotspotsymbol.png' %}" style="width:16px;height:16px;"><br>GPS</a></th>
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);" class="dropdown-toggle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duration</a></th>
-<ul class="dropdown-menu">
-<li><a href="#">bn</a></li>
-<li><a href="#">nn</a></li>
-<li><a href="#">nbn</a></li>
-</ul>
-</li>
+
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);">Speed</a><i class="fa fa-fw fa-sort" style="color:rgb(102, 102, 102);float:right;"></i></th>
-<ul class="dropdown-menu">
-<li><a href="#">bn</a></li>
-<li><a href="#">nn</a></li>
-<li><a href="#">nbn</a></li>
-</ul>
+
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);">LAT & LOG</a></th>
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);">POI</a></th>
 <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);">Info</a></th>
