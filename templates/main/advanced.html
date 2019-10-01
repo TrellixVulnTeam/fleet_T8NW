@@ -424,29 +424,35 @@ icon: '{% static 'images/bluecar.png'%}'
 
 var infowindow = new google.maps.InfoWindow();
 var j,labels='';
-for(j in locations){
-var Latlng = new google.maps.LatLng(locations[j]);
-var marker = new google.maps.Marker({
 
-position: Latlng,
-icon: icons[locations[j].status].icon,
-label: labels[j % labels.length],
-title: locations[j].plate,
+var marker = locations.map(function(location, i) {
+return new google.maps.Marker({
+position: location,
+icon: icons[location.status].icon,
+label: labels[i % labels.length],
+title: location.plate,
 map:map
 });
- google.maps.event.addListener(marker, 'click', function(j) {
-  return function() {
+
+});
+
+
+
+var markerCluster = new MarkerClusterer(map, marker,
+{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+ for (j=0;j<= marker.length;j++) {
+
+marker.addListener( 'click', function(j) {
+
  document.getElementById('im').src = icons[locations[j].status].icon ;
 document.getElementById('vno').innerHTML = locations[j].plate ;
 
 $("#mySidenav").toggle();
         document.getElementById("mySidenav").style.width = "250px";
-}}(j));
-};
-var markerCluster = new MarkerClusterer(map, marker,
-{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+}(j));
 
-
+}
 
 }
 var locations = {{ myfile|safe }};

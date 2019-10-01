@@ -376,18 +376,14 @@ def map (request):
 
 def funclu(po):
     lat_list = list(po["latitude"])
-    print(len(lat_list))
     long_list = list(po["longitude"])
     v_plate = list(po["plateNumber"])
+    print(len(v_plate))
+    data1 = "one"
     v_status = list(po["status"])
-    gmaps.configure(api_key="AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU")
-    fig = gmaps.figure()
     var1 = json.dumps(
         [{'lat': country, 'lng': wins,'plate':num,'status':v_sta} for country, wins, num, v_sta in zip(lat_list, long_list,v_plate,v_status)]
     )
-    markers = gmaps.marker_layer(list(zip(lat_list, long_list)))
-    fig.add_layer(markers)
-    data1 = embed_snippet(views=[fig])
     return data1, var1
 
 def cluster(request):

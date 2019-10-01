@@ -8,122 +8,9 @@
 
 
 
+
     <script>
-function CenterControl(controlDiv, map) {
 
-// Set CSS for the control border.
-var controlUI = document.createElement('div');
-controlUI.style.backgroundImage = 'url("https://img.icons8.com/ios/20/000000/filter.png")';
-controlUI.style.backgroundRepeat = 'no-repeat';
-controlUI.style.border = '2px solid #fff';
-controlUI.style.borderRadius = '3px';
-controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-controlUI.style.cursor = 'pointer';
-controlUI.style.marginTop = '0px';
-controlUI.style. marginRight='10px';
-controlUI.style.textAlign = 'center';
-controlUI.title = 'Filters';
-controlUI.style.backgroundColor='white';
-controlUI.style.height='30px';
-controlUI.style.width='35px';
-controlDiv.appendChild(controlUI);
-controlUI.addEventListener('click', function() {
-map.setCenter(chicago);
-});
-
-}
-function CenterControl2(controlDiv, map) {
-
-// Set CSS for the control border.
-var controlUI = document.createElement('div');
-controlUI.style.backgroundImage = 'url("https://img.icons8.com/ios-glyphs/20/000000/address.png")';
-controlUI.style.backgroundRepeat = 'no-repeat';
-controlUI.style.border = '2px solid #fff';
-controlUI.style.borderRadius = '3px';
-controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
-controlUI.style.cursor = 'pointer';
-controlUI.style.marginBottom = '0px';
-controlUI.style. marginRight='10px';
-controlUI.style.textAlign = 'center';
-controlUI.title = 'Address';
-controlUI.style.backgroundColor='white';
-controlUI.style.height='30px';
-controlUI.style.width='35px';
-controlDiv.appendChild(controlUI);
-controlUI.addEventListener('click', function() {
-map.setCenter(chicago);
-});
-
-}
-function CenterControl3(controlDiv, map) {
-
-// Set CSS for the control border.
-var controlUI = document.createElement('div');
-controlUI.style.backgroundImage = 'url("https://img.icons8.com/wired/20/000000/treasure-map.png")';
-controlUI.style.backgroundRepeat = 'no-repeat';
-controlUI.style.border = '2px solid #fff';
-controlUI.style.borderRadius = '3px';
-controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
-controlUI.style.cursor = 'pointer';
-controlUI.style.marginBottom = '0px';
-controlUI.style. marginRight='10px';
-controlUI.style.textAlign = 'center';
-controlUI.title = 'PlayBack';
-controlUI.style.backgroundColor='white';
-controlUI.style.height='30px';
-controlUI.style.width='35px';
-controlDiv.appendChild(controlUI);
-controlUI.addEventListener('click', function() {
-map.setCenter(chicago);
-});
-
-}
-function CenterControl4(controlDiv, map) {
-
-// Set CSS for the control border.
-var controlUI = document.createElement('div');
-controlUI.style.backgroundImage = 'url("https://img.icons8.com/windows/20/000000/comments.png")';
-controlUI.style.backgroundRepeat = 'no-repeat';
-controlUI.style.border = '2px solid #fff';
-controlUI.style.borderRadius = '3px';
-controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
-controlUI.style.cursor = 'pointer';
-controlUI.style.marginBottom = '0px';
-controlUI.style. marginRight='10px';
-controlUI.style.textAlign = 'center';
-controlUI.title = 'ToolTip';
-controlUI.style.backgroundColor='white';
-controlUI.style.height='30px';
-controlUI.style.width='35px';
-controlDiv.appendChild(controlUI);
-controlUI.addEventListener('click', function() {
-map.setCenter(chicago);
-});
-
-}
-function CenterControl5(controlDiv, map) {
-
-// Set CSS for the control border.
-var controlUI = document.createElement('div');
-controlUI.style.backgroundImage = 'url("https://img.icons8.com/ios-filled/20/000000/car.png")';
-controlUI.style.backgroundRepeat = 'no-repeat';
-controlUI.style.border = '2px solid #fff';
-controlUI.style.borderRadius = '3px';
-controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
-controlUI.style.cursor = 'pointer';
-controlUI.style.marginBottom = '0px';
-controlUI.style. marginRight='10px';
-controlUI.style.textAlign = 'center';
-controlUI.title = 'Vehicle';
-controlUI.style.backgroundColor='white';
-controlUI.style.height='30px';
-controlUI.style.width='35px';
-controlDiv.appendChild(controlUI);
-controlUI.addEventListener('click', function() {
-map.setCenter(chicago);
-});
-
-}
 function initMap() {
 var map = new google.maps.Map(document.getElementById('map'), {
 zoom: 4,
@@ -144,6 +31,45 @@ style: google.maps.ZoomControlStyle.SMALL,
 
 
 });
+
+
+var icons = {
+Idle: {
+name: 'Idle',
+icon: '{% static 'images/yellowcar.png'%}'
+},
+Running: {
+name: 'Running',
+icon: '{% static 'images/greencar.png'%}'
+},
+Stop: {
+name: 'Stop',
+icon: '{% static 'images/redcar.png'%}'
+},
+NOData: {
+name: 'Nodata',
+icon: '{% static 'images/bluecar.png'%}'
+}
+};
+
+var infowindow = new google.maps.InfoWindow();
+var j,labels='';
+
+var marker = locations.map(function(location, i) {
+return new google.maps.Marker({
+position: location,
+icon: icons[location.status].icon,
+label: labels[i % labels.length],
+title: location.plate,
+map:map
+});
+});
+
+
+
+var markerCluster = new MarkerClusterer(map, marker,
+{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
 var centerControlDiv = document.createElement('div');
 var centerControl1 = new CenterControl(centerControlDiv, map);
 
@@ -199,50 +125,113 @@ $('#myModal3').modal('toggle');
 $('#myModal3').modal('show');
 
 });
-
-var icons = {
-Idle: {
-name: 'Idle',
-icon: '{% static 'images/yellowcar.png'%}'
-},
-Running: {
-name: 'Running',
-icon: '{% static 'images/greencar.png'%}'
-},
-Stop: {
-name: 'Stop',
-icon: '{% static 'images/redcar.png'%}'
-},
-NOData: {
-name: 'Nodata',
-icon: '{% static 'images/bluecar.png'%}'
-}
-};
-
-var infowindow = new google.maps.InfoWindow();
-var j,labels='';
-
-var marker = locations.map(function(location, i) {
-return new google.maps.Marker({
-position: location,
-icon: icons[location.status].icon,
-label: labels[i % labels.length],
-title: location.plate,
-map:map
-});
-});
-
-
-
-var markerCluster = new MarkerClusterer(map, marker,
-{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-
 }
 var locations = {{ myfile|safe }};
+function CenterControl(controlDiv, map) {
+var controlUI = document.createElement('div');
+controlUI.style.backgroundImage = 'url("https://img.icons8.com/ios/20/000000/filter.png")';
+controlUI.style.backgroundRepeat = 'no-repeat';
+controlUI.style.border = '2px solid #fff';
+controlUI.style.borderRadius = '3px';
+controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginTop = '0px';
+controlUI.style. marginRight='10px';
+controlUI.style.textAlign = 'center';
+controlUI.title = 'Filters';
+controlUI.style.backgroundColor='white';
+controlUI.style.height='30px';
+controlUI.style.width='35px';
+controlDiv.appendChild(controlUI);
 
 
-$(document).ready(function(){
+}
+function CenterControl2(controlDiv, map) {
+
+// Set CSS for the control border.
+var controlUI = document.createElement('div');
+controlUI.style.backgroundImage = 'url("https://img.icons8.com/ios-glyphs/20/000000/address.png")';
+controlUI.style.backgroundRepeat = 'no-repeat';
+controlUI.style.border = '2px solid #fff';
+controlUI.style.borderRadius = '3px';
+controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginBottom = '0px';
+controlUI.style. marginRight='10px';
+controlUI.style.textAlign = 'center';
+controlUI.title = 'Address';
+controlUI.style.backgroundColor='white';
+controlUI.style.height='30px';
+controlUI.style.width='35px';
+controlDiv.appendChild(controlUI);
+
+
+}
+function CenterControl3(controlDiv, map) {
+
+// Set CSS for the control border.
+var controlUI = document.createElement('div');
+controlUI.style.backgroundImage = 'url("https://img.icons8.com/wired/20/000000/treasure-map.png")';
+controlUI.style.backgroundRepeat = 'no-repeat';
+controlUI.style.border = '2px solid #fff';
+controlUI.style.borderRadius = '3px';
+controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginBottom = '0px';
+controlUI.style. marginRight='10px';
+controlUI.style.textAlign = 'center';
+controlUI.title = 'PlayBack';
+controlUI.style.backgroundColor='white';
+controlUI.style.height='30px';
+controlUI.style.width='35px';
+controlDiv.appendChild(controlUI);
+
+
+}
+function CenterControl4(controlDiv, map) {
+
+// Set CSS for the control border.
+var controlUI = document.createElement('div');
+controlUI.style.backgroundImage = 'url("https://img.icons8.com/windows/20/000000/comments.png")';
+controlUI.style.backgroundRepeat = 'no-repeat';
+controlUI.style.border = '2px solid #fff';
+controlUI.style.borderRadius = '3px';
+controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginBottom = '0px';
+controlUI.style. marginRight='10px';
+controlUI.style.textAlign = 'center';
+controlUI.title = 'ToolTip';
+controlUI.style.backgroundColor='white';
+controlUI.style.height='30px';
+controlUI.style.width='35px';
+controlDiv.appendChild(controlUI);
+
+
+}
+function CenterControl5(controlDiv, map) {
+
+// Set CSS for the control border.
+var controlUI = document.createElement('div');
+controlUI.style.backgroundImage = 'url("https://img.icons8.com/ios-filled/20/000000/car.png")';
+controlUI.style.backgroundRepeat = 'no-repeat';
+controlUI.style.border = '2px solid #fff';
+controlUI.style.borderRadius = '3px';
+controlUI.style.boxShadow = '0 2px 2px rgba(0,0,0,.3)';
+controlUI.style.cursor = 'pointer';
+controlUI.style.marginBottom = '0px';
+controlUI.style. marginRight='10px';
+controlUI.style.textAlign = 'center';
+controlUI.title = 'Vehicle';
+controlUI.style.backgroundColor='white';
+controlUI.style.height='30px';
+controlUI.style.width='35px';
+controlDiv.appendChild(controlUI);
+
+
+}
+
+
 $("#b1").hide();
 $("#c1").hide();
 $("#v1").hide();
@@ -295,7 +284,7 @@ $("#b1").hide();
 $("#c1").hide();
 $("#vt1").hide();
 });
-});
+
 function myFunction() {
 var input, filter, table, tr, td, i, txtValue;
 input = document.getElementById("myInput");
@@ -327,12 +316,10 @@ $('#sample').show();
 
   $('#sample').show();
   $('#map').show();
-
 $('#sample').addClass('sample');
   $('#map').addClass('col-md-6');
     $('#map').addClass('map');
 $('#map').removeClass('d');
-
 }
 function myText2(){
 $('#map').show();
@@ -765,9 +752,6 @@ alert("fdjhjdf");
     </div>
     </div>
         <div id="map" class=" col-md-6 map"></div> </div></div>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&callback=initMap">
-    </script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&callback=initMap"></script>
 {% endblock %}
