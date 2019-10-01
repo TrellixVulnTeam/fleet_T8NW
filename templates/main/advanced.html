@@ -442,15 +442,15 @@ var markerCluster = new MarkerClusterer(map, marker,
 {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
  for (j=0;j<= marker.length;j++) {
-
-marker.addListener( 'click', function(j) {
-
+var mark = marker[j];
+ google.maps.event.addListener(mark, 'click', function(j) {
+ return function() {
  document.getElementById('im').src = icons[locations[j].status].icon ;
 document.getElementById('vno').innerHTML = locations[j].plate ;
 
 $("#mySidenav").toggle();
         document.getElementById("mySidenav").style.width = "250px";
-}(j));
+}}(j));
 
 }
 
