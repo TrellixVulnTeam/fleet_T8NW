@@ -5,25 +5,28 @@
 <style>
 
 .add{
-background-color:black;
+float:right;
 color: white;
-width:7%;
+font-size:15px;
 }
 .right{
 float:right;
 font-size:25px;
+padding-right:170px;
 }
 
 .left{
 float:left;
 font-size:25px;
 color:black;
+padding-left:50px;
 }
 
 .table {
 font-family: arial, sans-serif;
 border-collapse: collapse;
 width: 100%;
+
 }
 
 td, th {
@@ -42,16 +45,11 @@ background-color: white;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <body>
-<span class="left">Company Name</span><span class="right">Tickets</span>
-<br/>
-<br/>
-<div align="right"><br/>
-<button class="add">add</button>
+<span class="left">Company Name</span><span class="right">Tickets<br><button type="button" class="btn btn-primary add">Add</button></span><br><br><br>
+<p align="left" style="padding-left:50px;">Melbourne,Australia</p>
+<p align="left" style="padding-left:50px;">Ph:(123)456-7890</p>
 
-
-<p align="left" >Melbourne,Australia</p>
-<p align="left">P:(123)456-7890</p>
-<hr style="width:80%";>
+<hr>
 <div class="container">
 <div class="row">
 <div class="col-lg-10">
@@ -119,17 +117,17 @@ background-color: white;
 <td>Lorem ipsum dolor sit amet Consectetur</td>
 <td>432</td>
 <td>$9,928</td>
-<td style="align:right";>Sub-total:150</td>
+<td><b>Sub-total:150</b></td>
 </tr>
 </tbody>
 </table>
 </div>
 
 
-<div class="col-lg-2" style="padding-left:5px;">
-<h5>Ticket Date:March 15,2016<br>Ticket Status:<button style="background-color:lightyellow;align:white;">
-    progress</button> <br/>Ticket ID: #1234567</h5>
-</div></div></div></div>
+<div class="col-lg-2">
+<h5 style="font-size:12px;"><b>Ticket Date:</b>&nbsp;March 15,2016<br><b>Ticket Status:</b>&nbsp;
+<button>Pending</button><br><b>Ticket ID:</b>&nbsp;#1234567</h5>
+</div></div></div>
 
 <br/>
 <br/>

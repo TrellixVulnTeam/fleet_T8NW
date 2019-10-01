@@ -39,7 +39,7 @@
 
       #vno {
         color: #000;
-
+width:180px;
         margin-left: 12px;
         padding: 5px 11px 0px 11px;
       }
@@ -53,41 +53,49 @@
 
     </style>
 	<script>
-	function search() { 
-
+	function search() {
     var input = document.getElementById('vno').value;
     input=input.toLowerCase(); 
-    var  x = document.getElementsByClassName('vehno'); 
-    for (i = 0; i < x.length; i++) {  
-        if (!x[i].innerHTML.toLowerCase().includes(input)) { 
-            x[i].style.display="none"; 
-        } 
-        else {x
-            x[i].style.display="list-item";                  
-        } 
-    } 
+    var  x = document.getElementById('list');
+
+       li = x.getElementsByTagName("li");
+
+    for (i = 0; i < li.length; i++) {
+
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
 }
 	</script>
 
     <div style="display: none">
         <form  method="post" >
-        <input id="origin-input" class="controls" type="text"
+        <input id="origin-input" class="controls" type="text" required="required"
             placeholder="Enter an origin location">
 
-        <input id="destination-input" class="controls" type="text"
+        <input id="destination-input" class="controls" type="text" required="required"
             placeholder="Enter a destination location">
-<input id="vno" onkeyup="search()" type="text" class="controls"
-        name="search" placeholder="Search Vehicle No..">
-         <ol id='list'> 
-        <li class="vehno">TNH1200</li> </ol>
-            <input type="submit" class="btn btn-primary controls" id="sub" style="margin-left:10px;font-size:16px;">
+<select id="vno"  class="controls"
+        name="search" placeholder="Search Vehicle No.."></select>
+
+            <input type="submit" class="btn btn-primary controls" id="sub" style="margin-left:10px;font-size:16px;" onclick="aja();">
             </form>
     </div>
-
+<div style="display:none" id="c"></div>
     <div id="map12"></div>
     <script>
 
-
+var distance="";
+var time="";
+var startid="";
+var endid="";
+var plateno={{json|safe}};
+console.log(plateno);
 function initMap() {
 
   var map = new google.maps.Map(document.getElementById('map12'), {
@@ -95,7 +103,7 @@ function initMap() {
    zoom: 4,
 center: {lat: 22.9734, lng: 78.6569},
   });
-
+infowindow = new google.maps.InfoWindow();
   new AutocompleteDirectionsHandler(map);
 }
 
@@ -103,7 +111,7 @@ function AutocompleteDirectionsHandler(map) {
   this.map = map;
   this.originPlaceId = null;
   this.destinationPlaceId = null;
-  this.travelMode = 'WALKING';
+  this.travelMode = 'DRIVING';
   this.directionsService = new google.maps.DirectionsService;
   this.directionsRenderer = new google.maps.DirectionsRenderer;
   this.directionsRenderer.setMap(map);
@@ -122,7 +130,6 @@ function AutocompleteDirectionsHandler(map) {
   // Specify just the place data fields that you need.
   destinationAutocomplete.setFields(['place_id']);
 
-  
  
 
   this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
@@ -134,13 +141,14 @@ function AutocompleteDirectionsHandler(map) {
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(vno);
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(sub);
 }
+vno.addEventListener("click", function(event){hinter(event)});
 
 
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
     autocomplete, mode) {
   var me = this;
 
- 
+
   autocomplete.bindTo('bounds', this.map);
 
   autocomplete.addListener('place_changed', function() {
@@ -155,6 +163,7 @@ AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
       me.destinationPlaceId = place.place_id;
     }
     me.route();
+
   });
 };
 
@@ -163,7 +172,8 @@ AutocompleteDirectionsHandler.prototype.route = function() {
     return;
   }
   var me = this;
-
+startid=this.originPlaceId;
+endid=this.destinationPlaceId;
   this.directionsService.route(
       {
         origin: {'placeId': this.originPlaceId},
@@ -173,13 +183,64 @@ AutocompleteDirectionsHandler.prototype.route = function() {
       function(response, status) {
         if (status === 'OK') {
           me.directionsRenderer.setDirections(response);
+tim=response.routes[0].legs[0].duration.text;
+distance=response.routes[0].legs[0].distance.text;
+  var center = response.routes[0].overview_path[Math.floor(response.routes[0].overview_path.length / 2)];
+  infowindow.setPosition(center);
+  infowindow.setContent( distance + "<br>" + tim);
+  infowindow.open(me.map);
+
         } else {
           window.alert('Directions request failed due to ' + status);
         }
       });
+
 };
 
-    </script>
+
+function hinter(event) {
+
+
+    var input = event.target;
+
+    var min_characters = 0;
+
+    if (input.value.length < min_characters ) {
+        return;
+    } else {
+
+
+var i=0;
+                // clear any previously loaded options in the datalist
+
+
+for(i in plateno){
+
+ var x = document.createElement("option");
+  x.setAttribute("value", plateno[i].plate);
+  var t = document.createTextNode(plateno[i].plate);
+  x.appendChild(t);
+  document.getElementById("vno").appendChild(x);
+
+            }
+
+            }
+        };
+        function aja(){
+
+var start=document.getElementById("origin-input").value;
+var end=document.getElementById("destination-input").value;
+var vehicleno=document.getElementById("vno").value;
+
+ $.ajax({
+                method: "POST",
+                url: endpoint,
+                data:{start: start,end:end,startid:startid,endid:endid,vehicleno:vehicleno,distance:distance,tim:tim},
+        success: function(data){alert("success")},
+        });
+}
+
+</script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&libraries&libraries=places&callback=initMap"
         async defer></script>
 <div class="container-fluid">
