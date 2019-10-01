@@ -18,6 +18,7 @@ from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
 from vehicles import views
+from home import home
 
 from django.contrib.auth import views as auth_views
 
@@ -60,6 +61,7 @@ urlpatterns = [
     path('reports/',include('reports.urls')),
     path('advance/',advance,name='advance'),
     path('', include('trip.urls')),
+    path("home/",home,name='home'),
 ]
 
 if settings.DEBUG:

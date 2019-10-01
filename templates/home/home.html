@@ -1,10 +1,274 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+{% extends 'main/sidenav.html' %}
+{% load static %}
+{% block content1 %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/kelly.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+.a{
+padding-top: 20px;
+}
+#chartdiv{
+width: 285px;
+height: 280px;
+
+}
+#x{
+border-radius: 10%;
+}
+#chartContainer {
+width: 100%;
+height: 300px;
+color:white;
+margin: 0px;
+padding: 0px;
+
+}
+.card-body{
+color: white;
+border-radius: 10%;
+width: 280px;
+height: 270px;
+padding: 0px;
+}
+.card{
+width: 209px;
+height: 300px;
+border-radius: 10%;
+padding:0px;
+}
+.col-lg-2{
+padding-right: 0px;
+padding:0px;
+
+}
+#car{
+width:318px;
+height:300px;
+border-radius: 10%;
+padding: 0px;
+}
+.hr1{
+border: 0;
+height: 0;
+width: 315px;
+border-top: 1px solid rgba(0, 0, 0, 0.1);
+border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.car1{
+width:209px;
+height:300px;
+border-radius: 10%;
+padding: 0px;
+}
+.sam{
+padding: 0px;
+margin: 0px;
+}
+</style>
 </head>
+
 <body>
-$END$
-</body>
-</html>
+<div class="container-fluid a">
+<br>
+<div class="row" style="margin-left:10px;">
+<div class="col-lg-4" id="chartContainer" ></div>&nbsp;
+<div class="col-lg-3" style="background-color:#263238;color:white;text-align:center;" id="x"><h4><b>Vehicle Distribution</b></h4><div id="chartdiv"></div></div>&nbsp;
+<div class="col-lg-2"><div class="card " style="background-color:#263238;">
+<div class="card-body car1"><img class="card-img-right"><br>
+<span style="font-size:15px;padding-left:20px;"><b>Fuel Usage</b></span><span style="font-size:9px;padding-left:50px;">Last 30 days</span><br><br>
+<h3 style="font-size:35px;text-align:center;">231.45 L</h3><h3 style="font-size:13px;color:#00ff00;text-align:center;">-4%</h3><br><br>
+<p style="font-size:16px;text-align:center;"><b>Profit</b></p><h3 style="font-size:35px;text-align:center;">0.34 M</h3><h3 style="font-size:13px;color: #00e600;text-align:center;">+16%</h3>
+</div></div></div>
+<div class="col-lg-2"><div class="card " style="background-color:#263238;">
+<div class="card-body car1"><img class="card-img-right"><br><span style="font-size:14px;padding-left:20px;"><b>Speed Violations</b></span><span style="font-size:9px;padding-left:20px;">Last 30 days</span><br><br>
+<h3 style="font-size:35px;text-align:center;">4 2 3 1</h3><br><br><p style="font-size:16px;text-align:center;"><b>Driver Violations</b></p><br>
+<h3 style="font-size:35px;text-align:center;">3 1</h3></div></div></div>
+</div><br>
+<div class="row">
+<div class="col-lg-3 sam"><div class="card " style="background-color:#263238;margin-left:20px;" id="car">
+<div class="card-body "><img class="card-img-right"><br>
+<span class="glyphicon glyphicon-bell" style="padding-left:20px;"></span>&nbsp;<span style="font-size:16px;padding-left:10px;"><b>Alerts</b></span><span class="glyphicon glyphicon-th-list" style="padding-left:160px;"></span><br><br><br>
+<span style="font-size:13px;padding-left:20px;">Mark(MS59Bj4611)</span><span style="font-size:12px;padding-left:95px;color:#ff8080;"><b>Low Fuel</b></span><br><br><br>
+<span style="font-size:13px;padding-left:20px;">Jones(RP9986)</span><span style="font-size:12px;padding-left:130px;color:#ff8080;"><b>Brakes</b></span><br><br><br>
+<span style="font-size:13px;padding-left:20px;">Chris(RR56590)</span><span style="font-size:12px;padding-left:100px;color:#ff8080;"><b>Low Power</b></span><br><br><br>
+<span style="font-size:13px;padding-left:20px;">Mary(GS6780)</span><span style="font-size:12px;padding-left:75px;color:#ff8080;"><b>High Temperature</b></span>
+</div></div></div>
+<div class="col-lg-3 sam"><div class="card " style="background-color:#263238;margin-left:10px;" id="car">
+<div class="card-body "><img class="card-img-right"><br>
+<span style="font-size:16px;padding-left:20px;"><b>Detail</b></span><span class="glyphicon glyphicon-th-list" style="padding-left:180px;"></span><br><br><br>
+<h3 style="font-size:15px;padding-left:20px;">Idle</h3>&nbsp;<div class="progress" style="height:10px;width:250px;margin-left:20px;"><div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:90%;">90%</div></div><hr class="hr1">
+<h3 style="font-size:15px;padding-left:20px;">Running</h3>&nbsp;<div class="progress" style="height:10px;width:250px;margin-left:20px;"><div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:70%;">70%</div></div><hr class="hr1">
+<h3 style="font-size:15px;padding-left:20px;">No Data</h3>&nbsp;<div class="progress" style="height:10px;width:250px;margin-left:20px;"><div class="progress-bar progress-bar-striped progress-bar-animated" style="width:80%;">80%</div></div>
+</div></div></div>
+<div class="col-lg-5 sam" id="chartCon" style="height:300px;width:100%;"></div>
+</div>
+</div>
+<script>
+am4core.ready(function() {
+am4core.useTheme(am4themes_kelly);
+am4core.useTheme(am4themes_animated);
+var chart = am4core.create("chartdiv", am4charts.PieChart);
+chart.data = [ {
+"country": "Europe",
+"litres": 371.9
+}, {
+"country": "France",
+"litres": 250.9
+}, {
+"country": "Italy",
+"litres": 200.8
+}, {
+"country": "Spain",
+"litres": 160.5
+},];
+chart.innerRadius = am4core.percent(50);
+var pieSeries = chart.series.push(new am4charts.PieSeries());
+pieSeries.dataFields.value = "litres";
+pieSeries.dataFields.category = "country";
+pieSeries.slices.template.stroke = am4core.color("#fff");
+pieSeries.slices.template.strokeWidth = 1;
+pieSeries.slices.template.strokeOpacity = 1;
+pieSeries.hiddenState.properties.opacity = 1;
+pieSeries.hiddenState.properties.endAngle = -90;
+pieSeries.hiddenState.properties.startAngle = -90;
+});
+</script>
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+animationEnabled: true,
+backgroundColor: "#263238",
+
+title:{
+text: "Profit & Loss",
+fontFamily: "arial black",
+fontColor: "#fff",
+},
+axisX: {
+interval: 1,
+intervalType: "year",
+labelFontColor: "white"
+},
+axisY:{
+valueFormatString:"#",
+gridColor: "#B6B1A8",
+tickColor: "#B6B1A8",
+labelFontColor: "white"
+},
+toolTip: {
+shared: true,
+content: toolTipContent
+},
+data: [{
+type: "stackedColumn",
+showInLegend: true,
+color: "#e06377",
+name: "Profit",
+dataPoints: [
+{ y: 6.75, x: new Date(2010,0) },
+{ y: 8.57, x: new Date(2011,0) },
+{ y: 10.64, x: new Date(2012,0) },
+{ y: 13.97, x: new Date(2013,0) },
+{ y: 15.42, x: new Date(2014,0) },
+{ y: 17.26, x: new Date(2015,0) },
+{ y: 20.26, x: new Date(2016,0) }
+]
+},
+{
+type: "stackedColumn",
+showInLegend: true,
+name: "Loss",
+color: "#ffcc5c",
+dataPoints: [
+
+{ y: 9.02, x: new Date(2011,0) },
+{ y: 11.80, x: new Date(2012,0) },
+{ y: 14.11, x: new Date(2013,0) },
+{ y: 15.96, x: new Date(2014,0) },
+{ y: 17.73, x: new Date(2015,0) },
+{ y: 21.5, x: new Date(2016,0) }
+]
+},
+
+]
+});
+chart.render();
+
+function toolTipContent(e) {
+var str = "";
+var total = 0;
+var str2, str3;
+for (var i = 0; i < e.entries.length; i++){
+var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\"> "+e.entries[i].dataSeries.name+"</span>: <strong>"+e.entries[i].dataPoint.y+"</strong><br/>";
+total = e.entries[i].dataPoint.y + total;
+str = str.concat(str1);
+}
+str2 = "<span style = \"color:DodgerBlue;\"><strong>"+(e.entries[0].dataPoint.x).getFullYear()+"</strong></span><br/>";
+total = Math.round(total * 100) / 100;
+str3 = "<span style = \"color:Tomato\">Total:</span><strong> "+total+"</strong><br/>";
+return (str2.concat(str)).concat(str3);
+}
+var dps = []; // dataPoints
+var chart = new CanvasJS.Chart("chartCon", {
+backgroundColor: "#263238",
+title :{
+text: "Speed",
+fontColor: "#fff"
+
+},
+axisX: {
+labelFontColor: "white"
+},
+axisY: {
+includeZero: false,
+labelFontColor: "white"
+},
+data: [{
+type: "line",
+dataPoints: dps,
+color: "red"
+}]
+});
+
+var xVal = 0;
+var yVal = 100;
+var updateInterval = 1000;
+var dataLength = 20; // number of dataPoints visible at any point
+
+var updateChart = function (count) {
+
+count = count || 1;
+
+for (var j = 0; j < count; j++) {
+yVal = yVal + Math.round(5 + Math.random() *(-5-5));
+dps.push({
+x: xVal,
+y: yVal
+});
+xVal++;
+}
+
+if (dps.length > dataLength) {
+dps.shift();
+}
+
+chart.render();
+};
+
+updateChart(dataLength);
+setInterval(function(){updateChart()}, updateInterval);
+}
+</script>
+{% endblock %}
