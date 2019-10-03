@@ -28,18 +28,18 @@ display: block;
 div.content {
   margin-left: 1px;
   padding: 1px 1px;
-  height: auto;
-  margin-top:50px;
+  margin-top:0px;
+  height:550px;
 }
 
 @media screen and (max-width: 700px) {
   .sidebar {
     width: 100%;
-    height: auto;
-    position: relative;
+    height: 550px;
+    position: fixed;
   }
   .sidebar a {float: left;  text-decoration: none;}
-  div.content {margin-left: 0;  text-decoration: none;}
+
 }
 
 @media screen and (max-width: 400px) {

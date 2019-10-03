@@ -1,221 +1,227 @@
 {% extends 'main/sidenav.html' %}
-{% load static from staticfiles %}
+{% load static %}
 {% block content1 %}
-    <style xmlns:border-radius="http://www.w3.org/1999/xhtml" xmlns:border-radius="http://www.w3.org/1999/xhtml"
-           xmlns:border-radius="http://www.w3.org/1999/xhtml">
+    <style>
+       #map-canvas {
+        height: 100%;
+        margin-top: 3px;
+        padding: 0px;
 
-    .a{
-padding-top: 100px;
-}
-   .b{
-padding-top: 50px;
-}
-.a .card{
-    font-size: 14px;
-    padding-left: 0px;
-    width: 180px;
-    background-color: #343A40;
-
-}
-.a .card:hover{
-
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-}
-
-.a .card-body{
-    padding-left: 5px;
-width: 300px;
-height: 80px;
-color:white;
-}
-.z{
-    width: 300px;
-height: 80px;
-    padding-right: 20px;
-    padding-left: 30px;
-}
-.navbar-header .navbar-toggle{
-color:white;
-}
-
-.a .card-body button{
-    border: none;
-    font-min-size: 16px;
-}
-
-.scrollit {
-    overflow: auto;
-    height:500px;
-font-min-size: 12px;
-}
-.card-horizontal{
-    display: flex;
-
-
-}
-
-.d{
-
-    height:auto;
-    border-radius: 8px;
-}
-.d img{
-    padding-left: 8px;
-
-}
-    #x{
-        text-decoration: none;
-    }
-</style>
-<script>
-
-   $(document).ready(function(){
-       $(".c1").mouseover(function(){
-
-           $("#b1").click();
-       });
-       $(".c2").mouseover(function(){
-           $("#b2").click();
-       });
-       $(".c3").mouseover(function(){
-
-           $("#b3").click();
-       });
-       $(".c4").mouseover(function(){
-
-           $("#b4").click();
-       });
-       $(".c5").mouseover(function(){
-
-           $("#b5").click();
-       });
-   })
-</script>
- <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
-
-
-
-<div class="container b " style="position:relative; bottom: 85px"><div class="row">
-    <div class="col-lg-3 text-center" style="padding-top: 150px">
-
-
-    <div class="panel-group " id="accordion" role="tablist" aria-multiselectable="true" >
-
-
-
-  <div class="scrollit" >
-{% for i in list_plate %}
-   <div class="card-horizontal bg-dark  " style="padding-left: 5px;border:3px solid white;border-radius:12px;"> <img src="{% static 'images/bikeicon.png'%}" height="55px" width="55px" style="padding-top: 18px; padding-left: 8px;"> <div class="z text-light ">
-       <div class="d" style="font-size: 12px ; padding-top: 3px;">{{ i.2 }} km
-       <img src="{% static 'images/charging.png'%}" height="21px" width="30px">
-       <img src="{% static 'images/battery.png'%}" height="21px" width="20px">
-       <img src="{% static 'images/noconnection.png'%}" height="21px" width="20px">
-       <img src="{% static 'images/pro.png'%}" height="25px" width="30px"></div>
-       <form class="small" method='POST'>{% csrf_token %}
-           <button value='{{ i.0 }}' class = 'bg-dark' name="listbutton1" style="font-size:13px;height: 20px;padding-right: 9px; border: none;" type='submit' id="x">{% csrf_token %}<p style="color:white;">{{ i.0 }}</p></button><p style="padding-bottom: 10px;">{{ i.1 }}</p></form><br><hn style="font-size: 10px;padding-top: 0px;">
-       </hn><p></p></div></div>
-{% endfor %}
-
-
-</div><!-- container --></div></div>
-    <div class="col-lg-6" >
-        <div id="googleMap" style="margin-top: 150px;">
-            <div id="map" style="height: 500px;width: 800px;"></div>
-    <script>
-
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 28.7041, lng: 77.1025},
-          zoom: 10
-        });
-
-
-          var myLatlng = new google.maps.LatLng(29.7041,80.1025);
-            var mapOptions = {
-            zoom: 4,
-            center: myLatlng
-            }
-            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-            var p = {{ plateloco|safe }};
-            var marker = new google.maps.Marker({
-                position: p[0],
-                icon: '{% static 'images/bluecar.png'%}',
-                title:"Hello World!"
-            });
-marker.setMap(map);
-
-
-
-        var drawingManager = new google.maps.drawing.DrawingManager({
-          drawingMode: google.maps.drawing.OverlayType.MARKER,
-          drawingControl: true,
-          drawingControlOptions: {
-            position: google.maps.ControlPosition.TOP_CENTER,
-            drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
-          },
-          markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
-          circleOptions: {
-            fillColor: '#ffff00',
-            fillOpacity: 0.2,
-            strokeWeight: 2,
-              strokeColor:'',
-            clickable: false,
-            editable: true,
-            zIndex: 1
-          }
-        });
-        drawingManager.setMap(map);
       }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&libraries=drawing&callback=initMap"
-         async defer></script>
-        </div>
 
+
+       .controls {
+       background-color:#fff;
+        margin-top: 6px;
+        margin-left: 0px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 28px;
+        outline: none;
+         color: #000;
+        width:180px;
+
+        padding: 5px 11px 0px 11px;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&v=3.exp&sensor=false&libraries=drawing,geometry"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<div style="display: none">
+
+<select id="vno"  class="controls"
+        name="search" ><option>Select Vehicle No..</option></select>
     </div>
- <div class="col-lg-3"></div>
-</div></div>
+    <div id="map-canvas"></div>
+    <div id="distanceSign" style="display:none;margin-top:30px;">
+        <div style="width:120px; height:30px">
+            <span>Radius :</span><span class="radiusValue"></span><span>km</span>
+        </div>
+    </div>
+    <script>
+        var map;
+        var currentOverlay;
+        var mouseOverListenerHandle = null;//this is to hide radius
+        var infoWindow;
+        var locations={{mygeo|safe}};
+function initialize() {
+  var mapOptions = {
+    center: {lat: 22.9734, lng: 78.6569},
+          zoom: 5,
+          draggableCursor:'default',
+  };
 
-{#------------------------------------drop boxes-------------------------------------------------------------------#}
+  // starting location of drawn overlays for distance/area calculations
+  var firstLatLng;
+  // the current completed overlay
 
-{#</div></div>#}
-{##}
-{#{% spaceless %}#}
-{#    <div class="container c" style="position:relative; bottom: 130px">#}
-{#    <div class="row text-light ">#}
-{#        <div class="col-sm-3 card bg-dark" style="border-radius: 25px; box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);">#}
-{#            <div class="card-header"><h5 style="padding-right: 10px">List</h5>#}
-{##}
-{#      <span class="glyphicon glyphicon-collapse-down" style="float:left;"></span>#}
-{##}
-{#            </div><div class="card-body"><div id="demo" style="padding-right: 20px;">#}
-{#            <div><p style="font-size: 12px"><img style="width:30px;height: 30px" src="{% static 'images/icon.png'%} "> MVLHAR200JGS00985</p></div>#}
-{#<div><p style="font-size: 12px"><img style="width:30px;height: 30px" src="{% static 'images/south.png'%}"> Address: Maharastra</p></div>#}
-{#<div><p style="font-size: 12px"><img style="width:30px;height: 30px" src="{% static 'images/speed.png'%}"> Speed: 28km</p></div>#}
-{#<div><p style="font-size: 12px"><img style="width:30px;height: 30px" src="{% static 'images/time.png'%}"> Time: 2019-07-22 11:00:59</p></div>#}
-{#</div>#}
-{#        </div>#}
-{#        </div>#}
-{#        <div class="col-sm-1"></div>#}
-{#         <div class="col-sm-3 card bg-dark" style="border-radius: 25px; box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);">#}
-{#             <div class="card-header"><h5>Status</h5>#}
-{#      <span class="glyphicon glyphicon-collapse-down" style="float:left;"></span>#}
-{##}
-{#             </div><div class="card-body" style="height: 50px"><div id="demo1"></div></div>#}
-{#         </div>#}
-{#         <div class="col-sm-1"></div>#}
-{#         <div class="col-sm-3 card bg-dark" style="border-radius: 25px; box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);">#}
-{#             <div class="card-header"><h5>Alerts</h5>#}
-{#      <span class="glyphicon glyphicon-collapse-down" style="float:left;"></span>#}
-{#    </div><div class="card-body"><div id="demo2"><div><p>No Data</p></div>#}
-{#<div><p></p></div>#}
-{#<div><p></p></div>#}
-{#<div><p></p></div>#}
-{#</div></div>#}
-{#         </div></div>#}
-{#    </div>#}
+  
+  var overlayTypes = [
+    google.maps.drawing.OverlayType.CIRCLE
+//	,google.maps.drawing.OverlayType.RECTANGLE
+//    ,google.maps.drawing.OverlayType.POLYGON
+  ];
+  
+   map = new google.maps.Map(document.getElementById('map-canvas'),
+    mapOptions);
+     var vno=document.getElementById("vno");
+map.controls[google.maps.ControlPosition.TOP_CENTER].push(vno);
+    vno.addEventListener("click", function(event){hinter(event)});
 
-{% endblock content1%}
+  // cycle through the overlayTypes
+  function nextOverlayType() {
+    var next = overlayTypes.shift();
+	overlayTypes.push(next);
+	return next;
+  }
 
+  // deactivate the Drawing manager and listen for clicks on the new overlay
+  function overlayCompleteListener (event) {
+    console.log('overlayCompleteListener');
+    drawingManager.setDrawingMode(null);
+	currentOverlay = event.overlay;
+	currentOverlay.addListener('click', overlayClickListener);
+	currentOverlay.addListener('radius_changed', showRadius);
+	currentOverlay.addListener('center_changed', showRadius);
+	showRadius();
+
+
+  };
+
+
+  function showRadius(){
+      console.log('showRadius');
+      if(infoWindow != null){
+          infoWindow.setMap(null);
+      }
+      $("#map-canvas").unbind("mousemove");
+      $("#distanceSign SPAN.radiusValue").text((currentOverlay.getRadius()/1000.0).toFixed(3));
+      var content = $("#distanceSign").html();
+      infoWindow = new google.maps.InfoWindow({
+          content:content,
+          position:currentOverlay.getCenter()
+      });
+      infoWindow.open(map);
+      $("#map-canvas").mousemove(function (e) {
+          infoWindow.setMap(null);
+      });
+
+  }
+  
+  // remove the overlay
+  function overlayClickListener (event) {
+    console.log('overlayClickListener');
+    event.stop();
+    if (typeof event.path === 'undefined') { // ignore clicks on polygon paths
+	  drawingManager.setDrawingMode(nextOverlayType());
+	  currentOverlay.setMap(null);
+	  google.maps.event.clearInstanceListeners(currentOverlay);
+	  currentOverlay = null;
+	}
+  };
+
+  var drawingManager = new google.maps.drawing.DrawingManager({
+    drawingMode: nextOverlayType(),
+    drawingControl: false,
+    markerOptions: {
+      icon: 'images/beachflag.png'
+    },
+    circleOptions: {
+      editable: true,
+      fillColor: 'rgba(255, 99, 71, 0.5)',
+      fillOpacity: .6,
+      strokeWeight: 2,
+	    strokeColor: '#ff0000',
+        clickable: true,
+
+         zIndex: 1
+    },
+	polygonOptions: {
+	  editable: true
+	},
+	polylineOptions: {
+	  editable: true
+	},
+	rectangleOptions: {
+	  editable: true
+	}
+
+
+  });
+
+
+
+  drawingManager.setMap(map);
+  drawingManager.addListener('overlaycomplete', overlayCompleteListener);
+
+}
+ function hinter(event) {
+    var input = event.target;
+
+    var min_characters = 0;
+
+    if (input.value.length < min_characters ) {
+        return;
+    } else {
+
+
+var i=0;
+        for(i in locations){
+
+ var x = document.createElement("option");
+  x.setAttribute("value", locations[i].plate);
+  var t = document.createTextNode(locations[i].plate);
+  x.appendChild(t);
+  document.getElementById("vno").appendChild(x);
+
+            }
+
+            }
+
+        };
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+<script>
+$(document).ready(function(){
+var selectedvehicle="";
+    var icons = {
+Idle: {
+name: 'Idle',
+icon: '{% static 'images/yellowcar.png'%}'
+},
+Running: {
+name: 'Running',
+icon: '{% static 'images/greencar.png'%}'
+},
+Stop: {
+name: 'Stop',
+icon: '{% static 'images/redcar.png'%}'
+},
+NOData: {
+name: 'Nodata',
+icon: '{% static 'images/bluecar.png'%}'
+}
+};
+  $("select#vno").change(function(){
+
+         selectedvehicle = $(this).children("option:selected").val();
+var marker = locations.map(function(location, i) {
+if(location.plate==selectedvehicle){
+return new google.maps.Marker({
+
+position: location,
+zoom:10,
+icon: icons[location.status].icon,
+title: location.plate,
+map:map
+});
+}
+});   });})
+</script>
+
+
+  {% endblock %}

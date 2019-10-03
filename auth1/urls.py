@@ -18,7 +18,7 @@ from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
 from vehicles import views
-from home import home
+from home.views import home
 
 from django.contrib.auth import views as auth_views
 

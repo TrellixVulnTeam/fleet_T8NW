@@ -248,24 +248,23 @@ def device_listview(request,pk,*args,**kwargs):
 
 
 def geofence(request):
-
+    reload_and_store()
     temp = get_temp()
     y1 = json.loads(temp)
-    print(len(y1))
     df1 = get_dataframe(y1)
-    y1, result = change_frames(df1)
+    df2 = filter_running(df1)
+    df3 = filter_idle(df1)
+    df4 = filter_stop(df1)
+    total = len(df1)
+    running = len(df2)
+    idle = len(df3)
+    stop = len(df4)
+    p1, result = funclu(df1)
+    queryset = vehicle.objects.all()
 
-    if request.method == 'POST' and 'viewbutton1' in request.POST:
-        plate = request.POST['listbutton1']
-        p1, v1 = listfun(plate, df1)
-
-    else:
-        print('escaped if case on geofence!!!!')
-        v1 = "{lat: 28.7041, lng: 77.1025}"
-
-    context = {'plateloco':v1,
-               'list_plate':result}
-    print(v1)
+    context = {
+        "mygeo": result, 'total': total, 'running': running, 'idle': idle, 'stop': stop, "object_list": queryset
+    }
     return render(request, 'main/geofence.html', context)
 
 def marker(request):
