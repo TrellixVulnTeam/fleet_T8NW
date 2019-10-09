@@ -248,7 +248,7 @@ def device_listview(request,pk,*args,**kwargs):
 
 
 def geofence(request):
-    reload_and_store()
+    # reload_and_store()
     temp = get_temp()
     y1 = json.loads(temp)
     df1 = get_dataframe(y1)
@@ -506,8 +506,6 @@ class track(APIView):
 
 
 def table_map(request):
-    print("one")
-    print("reymond")
-    print("viknesh")
+
     return render("main/table_map.html")
 

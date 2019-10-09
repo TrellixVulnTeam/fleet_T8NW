@@ -2,9 +2,9 @@
 {% load static %}
 {% block content1 %}
     <style>
-       #map-canvas {
-        height: 100%;
-        margin-top: 3px;
+       #map {
+        height: 110%;
+        margin-top: 0px;
         padding: 0px;
 
       }
@@ -25,137 +25,245 @@
 
         padding: 5px 11px 0px 11px;
       }
+      #panel {
+  width: auto;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  margin: 0px;
+}
+
+#color-palette {
+  clear: both;
+}
+
+.color-button {
+  width: 14px;
+  height: 14px;
+  font-size: 0;
+  margin: 2px;
+  float: left;
+  cursor: pointer;
+}
+
+#delete-button {
+  margin-top: 5px;
+  border-decoration:none;
+  background-color:transparent;
+  text-decoration:none;
+}
+.acre{background-color:white;
+color:black;
+width:auto;}
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&v=3.exp&sensor=false&libraries=drawing,geometry"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<div style="display: none">
+<div id="vo">
+
 
 <select id="vno"  class="controls"
         name="search" ><option>Select Vehicle No..</option></select>
+
+   &nbsp;&nbsp; <input type="submit" class="btn btn-primary">&nbsp;&nbsp;
+    <button id="button" class="btn btn-default">Select New Vehicle</button>
+</div>
+    <div id="map"></div>
+    <div id="panel"><div id="color-palette"></div>
+<div id="delete-button"><img src="https://img.icons8.com/color/30/000000/delete-forever.png" title="Delete Selected Shape"></div>
+        <div id="radi"></div>
     </div>
-    <div id="map-canvas"></div>
-    <div id="distanceSign" style="display:none;margin-top:30px;">
-        <div style="width:120px; height:30px">
-            <span>Radius :</span><span class="radiusValue"></span><span>km</span>
-        </div>
-    </div>
+
+
+
+
     <script>
-        var map;
-        var currentOverlay;
-        var mouseOverListenerHandle = null;//this is to hide radius
-        var infoWindow;
-        var locations={{mygeo|safe}};
+
+var drawingManager;
+var selectedShape;
+var colors = ['#1E90FF', '#FF1493', '#32CD32', '#FF8C00', '#4B0082'];
+var selectedColor,count=0;
+var colorButtons = {};
+var map,radius="",center="",area="",acre="";
+var locations={{mygeo|safe}};
+var infowindow;
+ var icons = {
+Idle: {
+name: 'Idle',
+icon: '{% static 'images/yellowcar.png'%}'
+},
+Running: {
+name: 'Running',
+icon: '{% static 'images/greencar.png'%}'
+},
+Stop: {
+name: 'Stop',
+icon: '{% static 'images/redcar.png'%}'
+},
+NOData: {
+name: 'Nodata',
+icon: '{% static 'images/bluecar.png'%}'
+}
+};
+function clearSelection() {
+  if (selectedShape) {
+    selectedShape.setEditable(false);
+    selectedShape = null;
+  }
+}
+
+function setSelection(shape) {
+  clearSelection();
+  selectedShape = shape;
+  shape.setEditable(true);
+  selectColor(shape.get('fillColor') || shape.get('strokeColor'));
+}
+
+function deleteSelectedShape() {
+  if (selectedShape) {
+    selectedShape.setMap(null);
+    // To show:
+    drawingManager.setOptions({
+      drawingControl: true
+    });
+  }
+}
+
+function selectColor(color) {
+  selectedColor = color;
+  for (var i = 0; i < colors.length; ++i) {
+    var currColor = colors[i];
+    colorButtons[currColor].style.border = currColor == color ? '2px solid #789' : '2px solid #fff';
+  }
+
+  // Retrieves the current options from the drawing manager and replaces the
+  // stroke or fill color as appropriate.
+  var polylineOptions = drawingManager.get('polylineOptions');
+  polylineOptions.strokeColor = color;
+  drawingManager.set('polylineOptions', polylineOptions);
+
+
+
+  var circleOptions = drawingManager.get('circleOptions');
+  circleOptions.fillColor = color;
+  drawingManager.set('circleOptions', circleOptions);
+
+}
+
+function setSelectedShapeColor(color) {
+  if (selectedShape) {
+    if (selectedShape.type == google.maps.drawing.OverlayType.CIRCLE) {
+      selectedShape.set('fillColor', color);
+    } else {
+      selectedShape.set('fillColor', color);
+    }
+  }
+}
+
+function makeColorButton(color) {
+  var button = document.createElement('span');
+  button.className = 'color-button';
+  button.style.backgroundColor = color;
+  google.maps.event.addDomListener(button, 'click', function() {
+    selectColor(color);
+    setSelectedShapeColor(color);
+  });
+
+  return button;
+}
+
+function buildColorPalette() {
+  var colorPalette = document.getElementById('color-palette');
+  for (var i = 0; i < colors.length; ++i) {
+    var currColor = colors[i];
+    var colorButton = makeColorButton(currColor);
+    colorPalette.appendChild(colorButton);
+    colorButtons[currColor] = colorButton;
+  }
+  selectColor(colors[0]);
+}
+
 function initialize() {
-  var mapOptions = {
-    center: {lat: 22.9734, lng: 78.6569},
+   map = new google.maps.Map(document.getElementById('map'), {
+   center: {lat: 22.9734, lng: 78.6569},
           zoom: 5,
-          draggableCursor:'default',
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+
+    zoomControl: true
+  });
+infowindow=new google.maps.InfoWindow();
+  var polyOptions = {
+    strokeWeight: 0,
+    fillOpacity: 0.45,
+    editable: true
   };
 
-  // starting location of drawn overlays for distance/area calculations
-  var firstLatLng;
-  // the current completed overlay
-
-  
-  var overlayTypes = [
-    google.maps.drawing.OverlayType.CIRCLE
-//	,google.maps.drawing.OverlayType.RECTANGLE
-//    ,google.maps.drawing.OverlayType.POLYGON
-  ];
-  
-   map = new google.maps.Map(document.getElementById('map-canvas'),
-    mapOptions);
-     var vno=document.getElementById("vno");
-map.controls[google.maps.ControlPosition.TOP_CENTER].push(vno);
-    vno.addEventListener("click", function(event){hinter(event)});
-
-  // cycle through the overlayTypes
-  function nextOverlayType() {
-    var next = overlayTypes.shift();
-	overlayTypes.push(next);
-	return next;
-  }
-
-  // deactivate the Drawing manager and listen for clicks on the new overlay
-  function overlayCompleteListener (event) {
-    console.log('overlayCompleteListener');
-    drawingManager.setDrawingMode(null);
-	currentOverlay = event.overlay;
-	currentOverlay.addListener('click', overlayClickListener);
-	currentOverlay.addListener('radius_changed', showRadius);
-	currentOverlay.addListener('center_changed', showRadius);
-	showRadius();
-
-
-  };
-
-
-  function showRadius(){
-      console.log('showRadius');
-      if(infoWindow != null){
-          infoWindow.setMap(null);
-      }
-      $("#map-canvas").unbind("mousemove");
-      $("#distanceSign SPAN.radiusValue").text((currentOverlay.getRadius()/1000.0).toFixed(3));
-      var content = $("#distanceSign").html();
-      infoWindow = new google.maps.InfoWindow({
-          content:content,
-          position:currentOverlay.getCenter()
-      });
-      infoWindow.open(map);
-      $("#map-canvas").mousemove(function (e) {
-          infoWindow.setMap(null);
-      });
-
-  }
-  
-  // remove the overlay
-  function overlayClickListener (event) {
-    console.log('overlayClickListener');
-    event.stop();
-    if (typeof event.path === 'undefined') { // ignore clicks on polygon paths
-	  drawingManager.setDrawingMode(nextOverlayType());
-	  currentOverlay.setMap(null);
-	  google.maps.event.clearInstanceListeners(currentOverlay);
-	  currentOverlay = null;
-	}
-  };
-
-  var drawingManager = new google.maps.drawing.DrawingManager({
-    drawingMode: nextOverlayType(),
-    drawingControl: false,
-    markerOptions: {
-      icon: 'images/beachflag.png'
+  drawingManager = new google.maps.drawing.DrawingManager({
+    drawingMode: google.maps.drawing.OverlayType.POLYGON,
+    drawingControlOptions: {
+      drawingModes: [
+        google.maps.drawing.OverlayType.POLYGON,
+		google.maps.drawing.OverlayType.CIRCLE
+      ],
+       position: google.maps.ControlPosition.TOP_CENTER,
     },
-    circleOptions: {
-      editable: true,
-      fillColor: 'rgba(255, 99, 71, 0.5)',
-      fillOpacity: .6,
-      strokeWeight: 2,
-	    strokeColor: '#ff0000',
-        clickable: true,
-
-         zIndex: 1
+markerOptions: {
+      draggable: true
     },
-	polygonOptions: {
-	  editable: true
-	},
-	polylineOptions: {
-	  editable: true
-	},
-	rectangleOptions: {
-	  editable: true
-	}
+    polylineOptions: {
+      editable: true
+    },
+
+    circleOptions: {editable:true},
+
+    map: map
+  });
+
+var vo=document.getElementById("vo");
+var panel=document.getElementById("panel");
+map.controls[google.maps.ControlPosition.TOP_CENTER].push(vo);
+map.controls[google.maps.ControlPosition.TOP_RIGHT].push(panel);
+
+  google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+    if (event.type == google.maps.drawing.OverlayType.CIRCLE) {
+       radius = event.overlay.getRadius();
+       center=event.overlay.getCenter();
+         area =3.1417* radius*radius;
+    acre = area/4046.86;
+   $("#radi").addClass("acre");
+ document.getElementById('radi').innerHTML="Area :"+area;
+    }
 
 
   });
 
 
 
-  drawingManager.setMap(map);
-  drawingManager.addListener('overlaycomplete', overlayCompleteListener);
+  google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
+    if (e.type != google.maps.drawing.OverlayType.MARKER) {
+      // Switch back to non-drawing mode after drawing a shape.
+      drawingManager.setDrawingMode(null);
+      // To hide:
+      drawingManager.setOptions({
+        drawingControl: false
+      });
 
+      var newShape = e.overlay;
+      newShape.type = e.type;
+      google.maps.event.addListener(newShape, 'click', function() {
+        setSelection(newShape);
+      });
+      setSelection(newShape);
+    }
+  });
+
+  // Clear the current selection when the drawing mode is changed, or when the
+  // map is clicked.
+  google.maps.event.addListener(drawingManager, 'drawingmode_changed', clearSelection);
+  google.maps.event.addListener(map, 'click', clearSelection);
+  google.maps.event.addDomListener(document.getElementById('delete-button'), 'click', deleteSelectedShape);
+  vno.addEventListener("click", function(event){hinter(event)});
+  buildColorPalette();
 }
+google.maps.event.addDomListener(window, 'load', initialize);
  function hinter(event) {
     var input = event.target;
 
@@ -180,48 +288,25 @@ var i=0;
             }
 
         };
+        var selectedvehicle,marker;
+$("select#vno").change(function(){
+      selectedvehicle = $(this).children("option:selected").val();
 
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
-<script>
-$(document).ready(function(){
-var selectedvehicle="";
-    var icons = {
-Idle: {
-name: 'Idle',
-icon: '{% static 'images/yellowcar.png'%}'
-},
-Running: {
-name: 'Running',
-icon: '{% static 'images/greencar.png'%}'
-},
-Stop: {
-name: 'Stop',
-icon: '{% static 'images/redcar.png'%}'
-},
-NOData: {
-name: 'Nodata',
-icon: '{% static 'images/bluecar.png'%}'
-}
-};
-  $("select#vno").change(function(){
-
-         selectedvehicle = $(this).children("option:selected").val();
-var marker = locations.map(function(location, i) {
+marker = locations.map(function(location, i) {
 if(location.plate==selectedvehicle){
 return new google.maps.Marker({
-
 position: location,
-zoom:10,
 icon: icons[location.status].icon,
 title: location.plate,
 map:map
 });
 }
-});   });})
-</script>
+});  document.getElementById("vno").disabled = true; });
+$("#button").click(function(){
+            location.reload(true);
+        });
+    </script>
+
 
 
   {% endblock %}
