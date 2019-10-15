@@ -1,13 +1,13 @@
-{% extends 'main/sidenav.html' %}
+{% extends 'main/sidenav_trip.html' %}
 {% load static %}
-{% block content1 %}
-
+{% block content2 %}
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-      width:80%;
-        height: 70%;
+      #map12 {
+      width:100%;
+        height: 80%;
+        margin-top:4%;
       }
 
       .controls {
@@ -40,7 +40,7 @@
 
       #vno {
         color: #000;
-        
+width:180px;
         margin-left: 12px;
         padding: 5px 11px 0px 11px;
       }
@@ -53,49 +53,39 @@
 	  .vehno{display: list-item;}
 
     </style>
-	<script>
-	function search() { 
 
-    var input = document.getElementById('vno').value;
-    input=input.toLowerCase(); 
-    var  x = document.getElementsByClassName('vehno'); 
-    for (i = 0; i < x.length; i++) {  
-        if (!x[i].innerHTML.toLowerCase().includes(input)) { 
-            x[i].style.display="none"; 
-        } 
-        else { 
-            x[i].style.display="list-item";                  
-        } 
-    } 
-} 
-	</script>
-  </head>
-  <body>
+
     <div style="display: none">
-        <input id="origin-input" class="controls" type="text"
+        <form  method="post" >
+        <input id="origin-input" class="controls" type="text" required="required"
             placeholder="Enter an origin location">
 
-        <input id="destination-input" class="controls" type="text"
+        <input id="destination-input" class="controls" type="text" required="required"
             placeholder="Enter a destination location">
-<input id="vno" onkeyup="search()" type="text" class="controls"
-        name="search" placeholder="Search Vehicle No.."> 
-         <ol id='list'> 
-        <li class="vehno">TNH1200</li> </ol>
-    </div>
+<select id="vno"  class="controls"
+        name="search" placeholder="Search Vehicle No.."></select>
 
-    <div id="map" >
-</div>
+            <input type="submit" class="btn btn-primary controls" id="sub" style="margin-left:10px;font-size:16px;" onclick="aja();">
+            </form>
+    </div>
+<div style="display:none" id="c"></div>
+    <div id="map12"></div>
     <script>
 
-
+var distance="";
+var time="";
+var startid="";
+var endid="";
+var plateno={{json|safe}};
+console.log(plateno);
 function initMap() {
 
-  var map = new google.maps.Map(document.getElementById('map'), {
+  var map = new google.maps.Map(document.getElementById('map12'), {
     mapTypeControl: false,
-    center: {lat: -33.8688, lng: 151.2195},
-    zoom: 13
+   zoom: 4,
+center: {lat: 22.9734, lng: 78.6569},
   });
-
+infowindow = new google.maps.InfoWindow();
   new AutocompleteDirectionsHandler(map);
 }
 
@@ -103,7 +93,7 @@ function AutocompleteDirectionsHandler(map) {
   this.map = map;
   this.originPlaceId = null;
   this.destinationPlaceId = null;
-  this.travelMode = 'WALKING';
+  this.travelMode = 'DRIVING';
   this.directionsService = new google.maps.DirectionsService;
   this.directionsRenderer = new google.maps.DirectionsRenderer;
   this.directionsRenderer.setMap(map);
@@ -116,12 +106,12 @@ function AutocompleteDirectionsHandler(map) {
   // Specify just the place data fields that you need.
   originAutocomplete.setFields(['place_id']);
 
+
   var destinationAutocomplete =
       new google.maps.places.Autocomplete(destinationInput);
   // Specify just the place data fields that you need.
   destinationAutocomplete.setFields(['place_id']);
 
-  
  
 
   this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
@@ -131,20 +121,22 @@ function AutocompleteDirectionsHandler(map) {
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
       destinationInput);
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(vno);
+    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(sub);
 }
+vno.addEventListener("click", function(event){hinter(event)});
 
 
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
     autocomplete, mode) {
   var me = this;
- 
+
+
   autocomplete.bindTo('bounds', this.map);
 
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
 
     if (!place.place_id) {
-      window.alert('Please select an option from the dropdown list.');
       return;
     }
     if (mode === 'ORIG') {
@@ -153,6 +145,7 @@ AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
       me.destinationPlaceId = place.place_id;
     }
     me.route();
+
   });
 };
 
@@ -161,7 +154,8 @@ AutocompleteDirectionsHandler.prototype.route = function() {
     return;
   }
   var me = this;
-
+startid=this.originPlaceId;
+endid=this.destinationPlaceId;
   this.directionsService.route(
       {
         origin: {'placeId': this.originPlaceId},
@@ -171,13 +165,83 @@ AutocompleteDirectionsHandler.prototype.route = function() {
       function(response, status) {
         if (status === 'OK') {
           me.directionsRenderer.setDirections(response);
+tim=response.routes[0].legs[0].duration.text;
+distance=response.routes[0].legs[0].distance.text;
+  var center = response.routes[0].overview_path[Math.floor(response.routes[0].overview_path.length / 2)];
+  infowindow.setPosition(center);
+  infowindow.setContent( distance + "<br>" + tim);
+  infowindow.open(me.map);
+
         } else {
           window.alert('Directions request failed due to ' + status);
         }
       });
+
 };
 
-    </script>
+
+function hinter(event) {
+
+
+    var input = event.target;
+
+    var min_characters = 0;
+
+    if (input.value.length < min_characters ) {
+        return;
+    } else {
+
+
+var i=0;
+                // clear any previously loaded options in the datalist
+
+
+for(i in plateno){
+
+ var x = document.createElement("option");
+  x.setAttribute("value", plateno[i].plate);
+  var t = document.createTextNode(plateno[i].plate);
+  x.appendChild(t);
+  document.getElementById("vno").appendChild(x);
+
+            }
+
+            }
+        };
+        function aja(){
+
+var start=document.getElementById("origin-input").value;
+var end=document.getElementById("destination-input").value;
+var vehicleno=document.getElementById("vno").value;
+
+ $.ajax({
+                method: "POST",
+                url: endpoint,
+                data:{start: start,end:end,startid:startid,endid:endid,vehicleno:vehicleno,distance:distance,tim:tim},
+        success: function(data){alert("success")},
+        });
+}
+
+</script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmXhcX8z4d4GxPxIiklwNvtqxcjZoWsWU&libraries&libraries=places&callback=initMap"
         async defer></script>
+<div class="container-fluid">
+    <div class="row">
+        <table class=" table table-striped table-dark table-bordered">
+            <tr>
+                <th>S.NO</th>
+                <th>Start</th>
+                <th>Stop</th>
+
+                <th>Vehicle No</th>
+                <th>Current Location</th>
+                <th>Distance</th>
+                <th>Duration</th>
+
+                <th>Complete/Incomplete</th>
+            </tr>
+            <tr><td>1</td><td>Chennai</td><td>Mumbai</td><td>TNH1500</td><td>Bangalore</td><td>1,336.8 km</td><td>28/09/2019-24HRS</td><td><input type="checkbox"></td></tr>
+        </table>
+    </div>
+</div>
 {% endblock %}
