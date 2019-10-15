@@ -468,6 +468,7 @@ class Doughnut(APIView):
             df = json_normalize(y["assetHistory"])
             df['serverTimeStamp'] = pd.to_datetime(df['serverTimeStamp'])
             df = df.set_index('serverTimeStamp')
+            #hello
             df['eventTimeStamp'] = pd.to_datetime(df['eventTimeStamp'])
             df1 = df.drop_duplicates(['deviceImeiNo'], keep='last')
             data = {
