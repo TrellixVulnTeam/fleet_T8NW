@@ -217,7 +217,7 @@ var vehicleno=document.getElementById("vno").value;
  $.ajax({
                 method: "POST",
                 url: endpoint,
-                data:{start: start,end:end,startid:startid,endid:endid,vehicleno:vehicleno,distance:distance,tim:tim},
+                data:{start: start,end:end,startid:startid,endid:endid,vehicleno:vehicleno,distance:distance,tim:time},
         success: function(data){alert("success")},
         });
 }

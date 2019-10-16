@@ -37,6 +37,11 @@ td {
     text-align:center;
 
 }
+.a .card:hover{
+
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
 hr{
 margin:5px;
 padding:0px;
@@ -120,12 +125,6 @@ width: 190px;
 height:78px;
     border-radius: 8px;
     border-color: transparent;
-
-}
-
-.a .card:hover{
-
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
@@ -215,7 +214,6 @@ input:checked + .slider:before {
 <script>
  $( document ).ready(function() {
 
-
 am4core.useTheme(am4themes_animated);
 
 var chart = am4core.create("chartdiv", am4charts.PieChart);
@@ -285,36 +283,36 @@ chart.legend.itemContainers.template.events.on("hit", function(ev) {
     <div class="container-fluid a" style="position:relative;">
 <br>
 <div class="row">
-<div class="col-lg-2 card  "><form class = '' method='GET'><button style="background-color: transparent;" class = 'p' name="totalbutton"  type='submit'>
+<div class="col-lg-2 card  "><form class = '' method='GET'><button style="background-color: transparent;" class = 'p' name="totalbutton" type='submit'>
 <div class="card-body "><img class="card-img-left" src="{% static 'images/miniwhite.png'%}" height="45px" width="100px" >
- &nbsp; &nbsp;<span style="font-size: 25px">{{ total }} </span><b style="padding-left:50px;">Total</b></div></button>
-</form></div>
+ &nbsp; &nbsp;<span style="font-size: 25px">{{ total }} </span><b style="padding-left:50px;">Total</b></div>
+</button></form></div>
 
 <div class="col-lg-2 card ">
-<form class = '' method='GET'><button class = 'p' name="runningbutton" type='submit' style="background-color: transparent"><div class="card-body"><img class="card-img-left" src="{% static 'images/minigreen.png'%}" height="40px" width="90px" >
-   &nbsp;&nbsp; &nbsp;&nbsp;<span style="font-size: 25px">{{ running }} </span><b style="padding-left:50px;">Running</b></div></button>
-</form></div>
+<form class = '' method='GET'><button style="background-color: transparent;" class = 'p' name="runningbutton" type='submit'><div class="card-body"><img class="card-img-left" src="{% static 'images/minigreen.png'%}" height="40px" width="90px" >
+   &nbsp;&nbsp; &nbsp;&nbsp;<span style="font-size: 25px">{{ running }} </span><b style="padding-left:50px;">Running</b></div>
+</button></form></div>
 
 <div class="col-lg-2 card " >
-<form method='GET'><button class = 'p' name="idlebutton" type='submit' style="background-color: transparent"><div class="card-body " ><img class="card-img-left" src="{% static 'images/miniyellow.png'%}" height="40px" width="100px">
- &nbsp;&nbsp;&nbsp;  <span style="font-size: 25px">{{ idle }} </span><b style="padding-left:50px;">Idle</b></div></button>
-</form></div>
+<form method='GET'><button style="background-color: transparent;" class = 'p' name="idlebutton" type='submit'><div class="card-body " ><img class="card-img-left" src="{% static 'images/miniyellow.png'%}" height="40px" width="100px">
+ &nbsp;&nbsp;&nbsp;  <span style="font-size: 25px">{{ idle }} </span><b style="padding-left:50px;">Idle</b></div>
+</button></form></div>
 
-<div class="col-lg-2 card"><form class = '' method='GET'><button class="p" name="stopbutton" type='submit' style="background-color: transparent" >
+<div class="col-lg-2 card"><form class = '' method='GET'><button style="background-color: transparent;" class = 'p' name="stopbutton" type='submit'>
 <div class="card-body "><img class="card-img-left" src="{% static 'images/minired.png'%}" height="40px" width="100px" >
 &nbsp;&nbsp;<span style="font-size: 25px">{{ stop }} </span><b style="padding-left:50px;margin-bottom: 30px;">Stop</b></div>
 </button></form></div>
-<div class="col-lg-2 card "><button class="p" style="background-color: transparent">
+<div class="col-lg-2 card ">
 <div class="card-body"><img class="card-img-left" src="{% static 'images/miniblue.png'%}" height="40px" width="100px" style="padding-right:10px; ">
-  &nbsp; &nbsp;&nbsp; <span style="font-size: 20px">0</span><b style="padding-left:30px;margin-bottom: 30px;"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Data</b></div></button></div>
+  &nbsp; &nbsp;&nbsp; <span style="font-size: 20px">0</span><b style="padding-left:30px;margin-bottom: 30px;"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Data</b></div></div>
  <div class="col-lg-2" id="chartdiv">  </div>
 
 <div  class="container-fluid scrollit">
     <table   cellpadding="5" cellspacing="5" ><tr>
-       <th>S.no</th>
-        <th>Status</th>
+       <th style="text-decoration:none;color:rgb(0, 0, 0);">S.no</th>
+        <th style="text-decoration:none;color:rgb(0, 0, 0);">Status</th>
         <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/driver_name.png" style="width:16px;height:16px;"><br>Driver</a></th>
-        <th>Branch</th>
+        <th style="text-decoration:none;color:rgb(0, 0, 0);">Branch</th>
         <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/vehicle_information.png" style="width:16px;height:16px;"><br>Vehicle</a></th>
         <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/total_running_km.png" style="width:16px;height:16px;"><br>Distance</a></th>
         <th><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="http://13.127.144.213//Themes//HR%20Blue/images/OverviewHeaderIcon/total_running_duration.png" style="width:16px;height:16px;"><br>Running</a></th>
@@ -338,7 +336,19 @@ chart.legend.itemContainers.template.events.on("hit", function(ev) {
 {% for i in object_list %}
         <tr>
             <td>{{ forloop.counter }}</td>
-            <td>{{ i.status }}</td>
+
+            <td>
+                {% if i.status == 'Running'%}
+                <img src="{% static 'images/greencar.png'%}">
+                {% elif i.status == 'Idle'%}
+                <img src="{% static 'images/yellowcar.png'%}">
+                {% elif i.status == 'Stop'%}
+                <img src="{% static 'images/redcar.png'%}">
+                {%else%}
+                <img src="{% static 'images/bluecar.png'%}">
+                {%endif%}
+            </td>
+
               <td>{{ i.name }}</td>
               <td>India</td>
               <td>{{ i.plateNumber }}</td>

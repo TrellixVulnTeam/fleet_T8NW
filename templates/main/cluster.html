@@ -766,7 +766,18 @@ function myFunction() {
 {% for i in object_list %}
 <tr>
 <td>{{ forloop.counter }}</td>
-<td>{{ i.status }}</td>
+<td>
+    {% if i.status == 'Running'%}
+    <img src="{% static 'images/greencar.png'%}">
+    {% elif i.status == 'Idle'%}
+    <img src="{% static 'images/yellowcar.png'%}">
+    {% elif i.status == 'Stop'%}
+    <img src="{% static 'images/redcar.png'%}">
+    {%else%}
+    <img src="{% static 'images/bluecar.png'%}">
+    {%endif%}
+</td>
+
 <td>{{ i.plateNumber }}</td>
 <td>{{ i.name }}</td>
 <td><a href="#" style="text-decoration:none;color:rgb(0, 0, 0);"><img src="{% static 'images/snow.jpg' %}" style="width:16px;height:16px;"><br></a></td>
