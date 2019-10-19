@@ -11,5 +11,6 @@ zope.interface==4.6.0
 requests
 gmaps
 names
+python-googlegeocoder
 virtualenv==16.7.2
 django-background-tasks
