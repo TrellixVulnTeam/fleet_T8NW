@@ -2,12 +2,16 @@ branch-defaults:
   master:
     environment: fleet
     group_suffix: null
+environment-defaults:
+  fleet:
+    branch: null
+    repository: null
 global:
   application_name: fleet
   branch: null
-  default_ec2_keyname: aws-eb
+  default_ec2_keyname: null
   default_platform: Python 3.6
-  default_region: ap-south-1eb
+  default_region: ap-south-1
   include_git_submodules: true
   instance_profile: null
   platform_name: null
