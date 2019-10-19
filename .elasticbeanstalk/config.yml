@@ -7,7 +7,7 @@ global:
   branch: null
   default_ec2_keyname: aws-eb
   default_platform: Python 3.6
-  default_region: ap-south-1
+  default_region: ap-south-1eb
   include_git_submodules: true
   instance_profile: null
   platform_name: null
