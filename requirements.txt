@@ -10,5 +10,6 @@ sqlparse==0.3.0
 zope.interface==4.6.0
 requests
 gmaps
+names
 virtualenv==16.7.2
 django-background-tasks
