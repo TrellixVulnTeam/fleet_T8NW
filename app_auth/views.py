@@ -273,7 +273,7 @@ def marker(request):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required
 def reports(request):
-    reload_and_store()
+    # reload_and_store()
     return render(request, 'main/report.html')
 
 
@@ -386,7 +386,7 @@ def funclu(po):
     return data1, var1
 
 def cluster(request):
-    reload_and_store()
+    # reload_and_store()
     temp = get_temp()
     y1 = json.loads(temp)
     df1 = get_dataframe(y1)

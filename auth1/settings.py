@@ -25,7 +25,7 @@ SECRET_KEY = 'vx1rvih8l2n+879ur6^!h4nn2dc1l1agirx&d7!^3evse^v50z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fleet.qm8322cksw.ap-south-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['djangoenv2.jvnrdgmavn.ap-south-1.elasticbeanstalk.com']
 
 
 

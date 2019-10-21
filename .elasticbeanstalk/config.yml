@@ -1,16 +1,16 @@
 branch-defaults:
   master:
-    environment: fleet
+    environment: djangoenv2
     group_suffix: null
 environment-defaults:
   fleet:
     branch: null
     repository: null
 global:
-  application_name: fleet
+  application_name: django-env2
   branch: null
-  default_ec2_keyname: null
-  default_platform: Python 3.6
+  default_ec2_keyname: aws-eb
+  default_platform: python-3.6
   default_region: ap-south-1
   include_git_submodules: true
   instance_profile: null
