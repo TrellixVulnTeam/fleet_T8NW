@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vx1rvih8l2n+879ur6^!h4nn2dc1l1agirx&d7!^3evse^v50z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['fleet1.jvnrdgmavn.ap-south-1.elasticbeanstalk.com']
 
@@ -130,9 +130,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static-cdn", "static_root")
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static-cdn", "static_root")
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "static-cdn", "media_root")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static-cdn", "media_root")
 
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR,"static-proj"),
