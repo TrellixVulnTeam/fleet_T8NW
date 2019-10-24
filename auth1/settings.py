@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'home',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -136,6 +137,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static-cdn", "media_root")
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR,"static-proj"),
 ]
+
 
 MEDIA_URL = '/media/'
 
