@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: djangoenv2
+    environment: fleet1
     group_suffix: null
 environment-defaults:
   fleet:

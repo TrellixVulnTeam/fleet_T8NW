@@ -213,12 +213,14 @@ for(i in plateno){
 var start=document.getElementById("origin-input").value;
 var end=document.getElementById("destination-input").value;
 var vehicleno=document.getElementById("vno").value;
-
+alert("ff");
  $.ajax({
                 method: "POST",
-                url: endpoint,
+                url: {%  url 'addtrip' %},
                 data:{start: start,end:end,startid:startid,endid:endid,vehicleno:vehicleno,distance:distance,tim:time},
-        success: function(data){alert("success")},
+        success: function(data){alert("success");
+        console.log(data);},
+     error:console.log(data),
         });
 }
 
