@@ -62,6 +62,7 @@ urlpatterns = [
     path('advance/',advance,name='advance'),
     path('', include('trip.urls')),
     path("home/",home,name='home'),
+
 ]
 
 if settings.DEBUG:

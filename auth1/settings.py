@@ -25,9 +25,9 @@ SECRET_KEY = 'vx1rvih8l2n+879ur6^!h4nn2dc1l1agirx&d7!^3evse^v50z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fleet1.jvnrdgmavn.ap-south-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = []
 
-
+#'fleet1.jvnrdgmavn.ap-south-1.elasticbeanstalk.com'
 
 
 INSTALLED_APPS = [
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'home',
 ]
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -58,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'auth1.urls'
 
@@ -130,15 +130,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static-cdn", "static_root")
-print(STATIC_ROOT)
+STATIC_ROOT = os.path.join(BASE_DIR, "static",)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static-cdn", "media_root")
 
 STATICFILES_DIRS =[
-    os.path.join(BASE_DIR,"static-cdn"),
+    os.path.join(BASE_DIR, "static"),
 ]
-
 
 MEDIA_URL = '/media/'
 
