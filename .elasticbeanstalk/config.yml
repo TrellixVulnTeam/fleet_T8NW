@@ -6,6 +6,9 @@ environment-defaults:
   fleet:
     branch: null
     repository: null
+  fleet1:
+    branch: null
+    repository: null
 global:
   application_name: django-env2
   branch: null
